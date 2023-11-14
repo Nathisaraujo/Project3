@@ -16,10 +16,34 @@ def initial_page():
     """
     Ask what the user wants to do
     """
-    print("Would you like to check a recipe or add a new one?")
-    print("Write add or check in the terminal, please.\n")
-
+    print("What would you like to do? \n")
+    print("1. Check a recipe \n")
+    print("2. Add a new one")
     user_option = input("Enter your answer here:")
-    print(f"The data provided is {user_option}")
+    user_option()
+
+def user_option():
+    """
+    add option
+    """
+    while True:
+        try:
+            if user_option == "1":
+                user_details = input("Name and Surname:")
+                recipe_name = input("Name of the recipe:")
+                ingredients_list = input("What are the ingredients?")
+                preparation_step = input("How we prepare the recipe?")
+                food_type = input("Is it savoury or sweet?")
+                whos_favorite = input("This recipe is who's favorite?")
+                #update the worksheet and then initial menu again
+                break
+            elif user_option == "2":
+                give_idea = input("How would you like it? \n 1. Savoury \n 2. Sweet")
+                #give a random recipe
+                break
+        except VauleError as e:
+            print("Invalid option")
+    
+
 
 initial_page()

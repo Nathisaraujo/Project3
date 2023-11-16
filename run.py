@@ -17,7 +17,7 @@ def initial_page():
     Ask what the user wants to do
     """
     print("What would you like to do? \n")
-    print("1. Check a recipe \n")
+    print("1. Check a recipe")
     print("2. Add a new one")
     user_option = input("Enter your answer here:")
     user_option()

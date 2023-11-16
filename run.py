@@ -53,5 +53,39 @@ def check_recipe():
             print('Please, enter 1 or 2 to continue.')
             print("Or you can enter 'exit' to go back to the initial menu.")
             continue
-            
+
+def recipe_suggestion():
+    import os
+    os.system('cls')
+
+    print("Would you like a savoury or a sweet recipe?\n")
+    print("1. Savoury")
+    print("2. Sweet")
+    print("3. I don't know, give me a light!")
+    print("4. Back to previous menu")
+    print("Enter 'exit' to go to initial menu\n")
+
+    while True:
+        user_option = input("Enter your answer here:").strip()
+        if user_option == "1":
+            print("Ok! Our today suggestion is:\n")
+            #put random savoury recipe
+        elif user_option == "2":
+            print("Ok! Today will have this for desert:\n")
+            #put random sweet recipe
+        elif user_option == "3":
+            print("Ok... but don't blame me if you don't like it...\n")
+            #put random recipe
+        elif user_option == "4":
+            import os
+            os.system('cls')
+            check_recipe()
+        elif user_option == "exit":
+            import os
+            os.system('cls')
+            initial_page()
+        else:
+            print('Please, enter a valid option to continue.')
+            print("Or you can enter 'exit' to go back to the initial menu.")
+            continue
 initial_page()

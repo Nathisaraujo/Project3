@@ -105,27 +105,34 @@ def add_recipe():
             print('its finally working;;;')            
         
      """
-     input("Name of the recipe:")
-     input("What are the ingredients?")
-     input("How we prepare the recipe?")
-     input("Is it savoury or sweet?") #IT HAS TO BE SAVOURY OR SWEET ONLY
-     input("This recipe is who's favorite?").isalpha()
+     recipe_name = input("Name of the recipe:")
+     ingredients_list = input("What are the ingredients?")
+     recipe_preparation = input("How we prepare the recipe?")
+     recipe_type = input("Is it savoury or sweet?") #IT HAS TO BE SAVOURY OR SWEET ONLY
+     recipe_favorite = input("This recipe is who's favorite?").isalpha()
      
      print("Please, make sure you added all information right.\n")
      print("1. Edit")
      print("2. Confirm")
 
      while True:
+         def update_worksheet(data):
+                    new_recipe = (user_details, ingredients_list, recipe_preparation, recipe_type, recipe_favorite)
+                    recipe_worksheet = SHEET.worksheet("recipes")
+                    recipe_worksheet.append_row(data)
+                    print("\nCookbook updated.")
+
          user_option = input("Enter your answer here:").strip()
          if user_option == "1":
-             print("Ok! What would you like to edit?\n")
-             print("1. Name\n 2. Recipe name\n 3.Ingredients\n 4.Recipe type\n 5. Recipe favorite")
-             edit_answer = input("Enter your answer here:").isaplha() #caracteres precisam ser alpha
-             while True:
-                     if edit_answer == "1":
-                        print("ok")#colocar só pra editar um ponto
-                     else:
-                        continue
+                update_worksheet()
+            #  print("Ok! What would you like to edit?\n")
+            #  print("1. Name\n 2. Recipe name\n 3.Ingredients\n 4.Recipe type\n 5. Recipe favorite")
+            #  edit_answer = input("Enter your answer here:").isaplha() #caracteres precisam ser alpha
+            #  while True:
+            #          if edit_answer == "1":
+            #             print("ok")#colocar só pra editar um ponto
+            #          else:
+            #             continue
                      
          elif user_option == "2":
              print("Ok! Thank you so much for your contribution!\n")
@@ -143,5 +150,13 @@ def add_recipe():
     #confirmar a adição da receita
     #agradecer e menu inicial
 
-    
+def update_worksheet(data):
+        new_recipe = (user_details + ingredients_list + recipe_preparation + recipe_type + recipe_favorite)
+        recipe_worksheet = SHEET.worksheet("recipes")
+        recipe_worksheet.append_row(data)
+        print("\nCookbook updated.")    
+
+data = add_recipe()
+new_recipe = [int(num) for num in data]
+update_worksheet(new_recipe)
 initial_page()

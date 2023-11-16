@@ -32,7 +32,26 @@ def initial_page():
             print('Please, enter 1 or 2 to continue.')
             continue
 
-    
+def check_recipe():
+    os.system('cls')
 
+    print("Would you like a specific recipe or a suggestion? \n")
+    print("1. Specific")
+    print("2. Suggestion")
 
+    while True:
+        user_option = input("Enter your answer here:").strip()
+        if user_option == "1":
+            print("Ok! Enter the recipe name here and we're going to see if we have it!\n")
+            input("Check recipe:")
+        elif user_option == "2":
+            recipe_suggestion()
+        elif user_option == "exit":
+            os.system('cls')
+            initial_page()
+        else:
+            print('Please, enter 1 or 2 to continue.')
+            print("Or you can enter 'exit' to go back to the initial menu.")
+            continue
+            
 initial_page()

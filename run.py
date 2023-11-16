@@ -88,4 +88,60 @@ def recipe_suggestion():
             print('Please, enter a valid option to continue.')
             print("Or you can enter 'exit' to go back to the initial menu.")
             continue
+
+def add_recipe():
+     import os
+     os.system('cls')
+
+     print("Ok! Then we'll need you to give us some information...")
+
+     user_details = input("Name and Surname:").isalpha() #isaplha not working
+
+     """
+     while True:
+        if not user_details.isalpha():
+            continue
+        else:
+            print('its finally working;;;')            
+        
+     """
+     input("Name of the recipe:")
+     input("What are the ingredients?")
+     input("How we prepare the recipe?")
+     input("Is it savoury or sweet?") #IT HAS TO BE SAVOURY OR SWEET ONLY
+     input("This recipe is who's favorite?").isalpha()
+     
+     print("Please, make sure you added all information right.\n")
+     print("1. Edit")
+     print("2. Confirm")
+
+     while True:
+         user_option = input("Enter your answer here:").strip()
+         if user_option == "1":
+             print("Ok! What would you like to edit?\n")
+             print("1. Name\n 2. Recipe name\n 3.Ingredients\n 4.Recipe type\n 5. Recipe favorite")
+             edit_answer = input("Enter your answer here:").isaplha() #caracteres precisam ser alpha
+             while True:
+                     if edit_answer == "1":
+                        print("ok")#colocar só pra editar um ponto
+                     else:
+                        continue
+                     
+         elif user_option == "2":
+             print("Ok! Thank you so much for your contribution!\n")
+             #update worksheet
+         elif user_option == "exit":
+             import os
+             os.system('cls')
+             initial_page()
+         else:
+             print('Please, enter a valid option to continue.')
+             print("Or you can enter 'exit' to go back to the initial menu.")
+             continue
+    
+    #check the information
+    #confirmar a adição da receita
+    #agradecer e menu inicial
+
+    
 initial_page()

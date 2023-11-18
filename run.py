@@ -13,6 +13,16 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('family_favorites')
 
+recipes = SHEET.worksheet('recipes')
+
+# def update_worksheet()
+#     worksheet = sheet.worksheet('recipes')
+#         data = worksheet.get_all_values()
+#         for row in data:
+#             print(row)
+
+# update_worksheet()
+
 def initial_page():
     """
     Ask what the user wants to do
@@ -116,15 +126,10 @@ def add_recipe():
      print("2. Confirm")
 
      while True:
-         def update_worksheet(data):
-                    new_recipe = (user_details, ingredients_list, recipe_preparation, recipe_type, recipe_favorite)
-                    recipe_worksheet = SHEET.worksheet("recipes")
-                    recipe_worksheet.append_row(data)
-                    print("\nCookbook updated.")
-
          user_option = input("Enter your answer here:").strip()
          if user_option == "1":
-                update_worksheet()
+            print("option 1 working")
+            break
             #  print("Ok! What would you like to edit?\n")
             #  print("1. Name\n 2. Recipe name\n 3.Ingredients\n 4.Recipe type\n 5. Recipe favorite")
             #  edit_answer = input("Enter your answer here:").isaplha() #caracteres precisam ser alpha
@@ -132,8 +137,7 @@ def add_recipe():
             #          if edit_answer == "1":
             #             print("ok")#colocar só pra editar um ponto
             #          else:
-            #             continue
-                     
+            #             continue         
          elif user_option == "2":
              print("Ok! Thank you so much for your contribution!\n")
              #update worksheet
@@ -146,17 +150,14 @@ def add_recipe():
              print("Or you can enter 'exit' to go back to the initial menu.")
              continue
     
+     data_list = (user_details, recipe_name, ingredients_list, recipe_preparation, recipe_type)
+     recipes.append_row(data_list)
+     print("updated completed.")
+
     #check the information
     #confirmar a adição da receita
     #agradecer e menu inicial
 
-def update_worksheet(data):
-        new_recipe = (user_details + ingredients_list + recipe_preparation + recipe_type + recipe_favorite)
-        recipe_worksheet = SHEET.worksheet("recipes")
-        recipe_worksheet.append_row(data)
-        print("\nCookbook updated.")    
+# update_worksheet()
 
-data = add_recipe()
-new_recipe = [int(num) for num in data]
-update_worksheet(new_recipe)
 initial_page()

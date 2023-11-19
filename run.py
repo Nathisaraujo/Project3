@@ -127,7 +127,7 @@ def add_recipe():
 
      while True:
          user_option = input("Enter your answer here:").strip()
-         if user_option == "1":
+         if user_option == "1": #confirming for now
             print("option 1 working")
             break
             #  print("Ok! What would you like to edit?\n")
@@ -138,7 +138,14 @@ def add_recipe():
             #             print("ok")#colocar só pra editar um ponto
             #          else:
             #             continue         
-         elif user_option == "2":
+         elif user_option == "2": #editing for now
+             print("What would you like to edit? \n 1. Name and surname \n 2. recipe's name")
+             edit_recipe = input("Enter your option here:")
+             if edit_recipe == "1":
+                 print("it's working")
+             elif edit_recipe == "2":
+                 print("option working")
+             
              print("Ok! Thank you so much for your contribution!\n")
              #update worksheet
          elif user_option == "exit":
@@ -160,4 +167,11 @@ def add_recipe():
 
 # update_worksheet()
 
-initial_page()
+def main():
+    """
+    run all program functions
+    """
+    initial_page()
+
+print("Welcome to family favorites")
+main()

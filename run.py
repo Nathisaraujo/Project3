@@ -3,6 +3,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 from pprint import pprint
 from tabulate import tabulate
+from random import random
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -48,7 +49,7 @@ def check_recipe():
     os.system('cls')
 
     print("Would you like a specific recipe or a suggestion? \n")
-    print("1. Specific")
+    print("1. View all recipes")
     print("2. Suggestion")
 
     while True:
@@ -83,8 +84,9 @@ def recipe_suggestion():
     while True:
         user_option = input("Enter your answer here:").strip()
         if user_option == "1":
-            print("Ok! Our today suggestion is:\n")
-            #put random savoury recipe
+            # print("Ok! Our today suggestion is:\n")
+            recipes = SHEET.worksheet("recipes").row_values()
+            print(random.choice(recipes))
         elif user_option == "2":
             print("Ok! Today will have this for desert:\n")
             #put random sweet recipe

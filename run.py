@@ -1,6 +1,8 @@
 import os
 import gspread
 from google.oauth2.service_account import Credentials
+from pprint import pprint
+from tabulate import tabulate
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -52,8 +54,11 @@ def check_recipe():
     while True:
         user_option = input("Enter your answer here:").strip()
         if user_option == "1":
-            print("Ok! Enter the recipe name here and we're going to see if we have it!\n")
-            input("Check recipe:")
+            # print("Ok! Enter the recipe name here and we're going to see if we have it!\n")
+            # input("Check recipe:")
+            all_recipes = SHEET.worksheet("recipes").get_all_values()
+            pprint(tabulate(all_recipes))
+
         elif user_option == "2":
             recipe_suggestion()
         elif user_option == "exit":

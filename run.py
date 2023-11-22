@@ -48,12 +48,12 @@ class Recipe:
 def search_recipe_by_name(recipe_name):
      
      recipes = []
-     all_columns = SHEET.worksheet("recipes").get_all_values()
-     row = SHEET.worksheet("recipes").append_row()
-     for column in all_columns:
-        if recipe_name.lower() in column[1].lower():  # Assuming recipe names are in the first column
+     all_rows = SHEET.worksheet("recipes").get_all_values()
+     for row in all_rows:
+         if recipe_name.lower() in row[1].lower():  # Assuming recipe names are in the first column
             recipes.append(row)
      return recipes
+
 
 
 def check_recipe():
@@ -88,8 +88,11 @@ def check_recipe():
 
              if found_recipes:
                  print(f"Found {len(found_recipes)} matching recipes:")
-                 for recipe in found_recipes:
-                     print(recipe)  # Modify this to display the recipe details in a user-friendly way
+                 for recipe_row in found_recipes:
+                     print("\nRecipe Details:")
+                     for detail in recipe_row:
+                         print()
+                         print(detail)
              else:
                  print("No recipes found with that name.")
 

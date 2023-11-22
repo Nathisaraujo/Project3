@@ -54,7 +54,10 @@ def search_recipe_by_name(recipe_name):
             recipes.append(row)
      return recipes
 
-
+# def print_headers():
+#     headers = SHEET.worksheet("recipes").row_values(1)
+#     for header in headers:
+#         print(header)
 
 def check_recipe():
     os.system('cls')
@@ -86,13 +89,22 @@ def check_recipe():
              recipe_name = input("Enter the recipe name to search: ")
              found_recipes = search_recipe_by_name(recipe_name)
 
+            #  print_headers()
+
+             headers = ["Type", "Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
+
              if found_recipes:
                  print(f"Found {len(found_recipes)} matching recipes:")
-                 for recipe_row in found_recipes:
-                     print("\nRecipe Details:")
-                     for detail in recipe_row:
-                         print()
-                         print(detail)
+                 recipe_row = found_recipes[0]
+                 print("\nRecipe Details:")
+                 recipe_table = tabulate([recipe_row], headers=headers, tablefmt="pretty")
+                 print(recipe_table)
+                #  for recipe_row in found_recipes:
+                    
+                    #  for detail in recipe_row:
+                        #  recipe_table = tabulate([recipe_row], headers=headers, tablefmt="pretty")
+                        #  print(recipe_table)
+                    
              else:
                  print("No recipes found with that name.")
 

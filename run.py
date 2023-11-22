@@ -45,6 +45,15 @@ class Recipe:
          self.recipe_type = recipe_type
          self.recipe_favorite = recipe_favorite
 
+def search_recipe_by_name(recipe_name):
+     
+     recipes = []
+     all_columns = SHEET.worksheet("recipes").get_all_values()
+     row = SHEET.worksheet("recipes").append_row()
+     for column in all_columns:
+        if recipe_name.lower() in column[1].lower():  # Assuming recipe names are in the first column
+            recipes.append(row)
+     return recipes
 
 
 def check_recipe():
@@ -64,8 +73,26 @@ def check_recipe():
 
         elif user_option == "2":
             # recipe_suggestion()
-            recipe_name = recipes.col_values(1).get_all_values()
-            print(recipe_name)
+            # recipe_name = recipes.col_values(1)
+            # print(tabulate(recipe_name))
+
+            # recipes = SHEET.worksheet("recipes")
+            # columns = []
+            # for ind in range(2, 5):
+            #     column = recipes.col_values(ind)
+            #     columns.append(column)
+            
+            # return columns
+             recipe_name = input("Enter the recipe name to search: ")
+             found_recipes = search_recipe_by_name(recipe_name)
+
+             if found_recipes:
+                 print(f"Found {len(found_recipes)} matching recipes:")
+                 for recipe in found_recipes:
+                     print(recipe)  # Modify this to display the recipe details in a user-friendly way
+             else:
+                 print("No recipes found with that name.")
+
 
         elif user_option == "exit":
             os.system('cls')
@@ -135,7 +162,7 @@ def add_recipe():
      ingredients_list = input("What are the ingredients?")
      recipe_preparation = input("How we prepare the recipe?")
      recipe_type = input("Is it savoury or sweet?") #IT HAS TO BE SAVOURY OR SWEET ONLY
-     recipe_favorite = input("This recipe is who's favorite?").isalpha()
+     recipe_favorite = input("This recipe is who's favorite?")
 
      print(f"""
          Recipe name: {recipe_name}

@@ -18,14 +18,6 @@ SHEET = GSPREAD_CLIENT.open('family_favorites')
 
 recipes = SHEET.worksheet('recipes')
 
-# def update_worksheet()
-#     worksheet = sheet.worksheet('recipes')
-#         data = worksheet.get_all_values()
-#         for row in data:
-#             print(row)
-
-# update_worksheet()
-
 def initial_page():
     """
     Ask what the user wants to do
@@ -45,6 +37,16 @@ def initial_page():
             print('Please, enter 1 or 2 to continue.')
             continue
 
+class Recipe:
+     def __init__(self, recipe_name, ingredients_list, recipe_preparation, recipe_type, recipe_favorite):
+         self.recipe_name = recipe_name
+         self.ingredients_list = ingredients_list
+         self.recipe_preparation = recipe_preparation
+         self.recipe_type = recipe_type
+         self.recipe_favorite = recipe_favorite
+
+
+
 def check_recipe():
     os.system('cls')
 
@@ -61,7 +63,10 @@ def check_recipe():
             pprint(tabulate(all_recipes))
 
         elif user_option == "2":
-            recipe_suggestion()
+            # recipe_suggestion()
+            recipe_name = recipes.col_values(1).get_all_values()
+            print(recipe_name)
+
         elif user_option == "exit":
             os.system('cls')
             initial_page()
@@ -84,9 +89,13 @@ def recipe_suggestion():
     while True:
         user_option = input("Enter your answer here:").strip()
         if user_option == "1":
+            recipes = SHEET.worksheet("recipes").get_all_values()
+            for row in recipes:
+                if user_option in recipes:
+                    print("working")
             # print("Ok! Our today suggestion is:\n")
-            recipes = SHEET.worksheet("recipes").row_values()
-            print(random.choice(recipes))
+            # recipes = SHEET.worksheet("recipes").row_values()
+            # print(random.choice(recipes))
         elif user_option == "2":
             print("Ok! Today will have this for desert:\n")
             #put random sweet recipe
@@ -127,6 +136,14 @@ def add_recipe():
      recipe_preparation = input("How we prepare the recipe?")
      recipe_type = input("Is it savoury or sweet?") #IT HAS TO BE SAVOURY OR SWEET ONLY
      recipe_favorite = input("This recipe is who's favorite?").isalpha()
+
+     print(f"""
+         Recipe name: {recipe_name}
+         Ingredients List: {ingredients_list}
+         Recipe Preparation: {recipe_preparation}
+         Recipe Type: {recipe_type}
+         Recipe Favorite: {recipe_favorite}
+            """)
      
      print("Please, make sure you added all information right.\n")
      print("1. Edit")

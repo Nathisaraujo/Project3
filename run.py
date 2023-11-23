@@ -2,8 +2,9 @@ import os
 import gspread
 from google.oauth2.service_account import Credentials
 from pprint import pprint
-from tabulate import tabulate
 from random import randint
+from prettytable import PrettyTable
+from tabulate import tabulate
 
 
 SCOPE = [
@@ -46,7 +47,7 @@ def search_recipe_by_name(recipe_name):
     recipes = []
     all_rows = SHEET.worksheet("recipes").get_all_values()
     for row in all_rows:
-        if recipe_name.lower() in row[1].lower(): 
+        if recipe_name.lower() in row[0].lower(): 
             recipes.append(row)
     return recipes
 
@@ -60,22 +61,39 @@ def check_recipe():
     while True:
         user_option = input("Enter your answer here:").strip()
         if user_option == "1":
+            headers = ["Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
+
             all_recipes = SHEET.worksheet("recipes").get_all_values()
-            pprint(tabulate(all_recipes))
+
+            tables = PrettyTable()
+            tables.field_names = headers
+            tables.max_width = 30
+            tables.align = "l"
+
+            for row in all_recipes:
+                tables.add_row(row)
+            print(tables)
 
         elif user_option == "2":
             print("Ok! Enter the recipe name here and we're going to see if we have it!\n")
             recipe_name = input("Check Recipe:")
             found_recipes = search_recipe_by_name(recipe_name)
 
-            headers = ["Type", "Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
+            headers = ["Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
 
             if found_recipes:
                 print(f"Found {len(found_recipes)} matching recipes:")
                 recipe_row = found_recipes[0]
                 print("\nRecipe Details:")
-                recipe_table = tabulate([recipe_row], headers=headers, tablefmt="pretty")
-                print(recipe_table)          
+
+                tables = PrettyTable()
+                tables.field_names = headers
+                tables.max_width = 30
+                tables.align = "l"
+
+                for row in found_recipes:
+                    tables.add_row(row)
+                print(tables)       
             else:
                 print("No recipes found with that name.")
         elif user_option == "exit":
@@ -112,13 +130,19 @@ def recipe_suggestion():
             print("Ok! Today will have this for desert:\n")
             
             if len(all_recipes) > 1:
-                
+                headers = ["Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
                 random_index = randint(1, len(all_recipes)-1)  
                 random_recipe = all_recipes[random_index - 1]
                 
-                headers = ["Type", "Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
-                random_recipe_table = tabulate([random_recipe], headers=headers, tablefmt="pretty")
-                print(random_recipe_table)
+                tables = PrettyTable()
+                tables.field_names = headers
+                tables.max_width = 30
+                tables.align = "l"
+
+                tables.add_row(random_recipe)
+                print(tables)    
+                # random_recipe_table = tabulate([random_recipe], headers=headers, tablefmt="pretty")
+                # print(random_recipe_table)
             #put random sweet recipe
         elif user_option == "3":
             print("Ok... but don't blame me if you don't like it...\n")
@@ -204,6 +228,7 @@ def add_recipe():
     recipe_favorite = input("This recipe is who's favorite?")
 
     print(f"""
+        Your name: {user_details}
         Recipe name: {recipe_name}
         Ingredients List: {ingredients_list}
         Recipe Preparation: {recipe_preparation}
@@ -221,16 +246,6 @@ def add_recipe():
             update_table()        
         elif user_option == "2":
             editing()
-
-            #  print("Ok! What would you like to edit?\n")
-            #  print("1. Name\n 2. Recipe name\n 3.Ingredients\n 4.Recipe type\n 5. Recipe favorite")
-            #  edit_answer = input("Enter your answer here:").isaplha() #caracteres precisam ser alpha
-            #  while True:
-            #          if edit_answer == "1":
-            #             print("ok")#colocar só pra editar um ponto
-            #          else:
-            #             continue 
-                #update worksheet
         elif user_option == "exit":
             import os
             os.system('cls')

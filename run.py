@@ -37,59 +37,32 @@ def initial_page():
             print('Please, enter 1 or 2 to continue.')
             continue
 
-class Recipe:
-    def __init__(self, recipe_name, ingredients_list, recipe_preparation, recipe_type, recipe_favorite):
-        self.recipe_name = recipe_name
-        self.ingredients_list = ingredients_list
-        self.recipe_preparation = recipe_preparation
-        self.recipe_type = recipe_type
-        self.recipe_favorite = recipe_favorite
-
 def search_recipe_by_name(recipe_name):
      
     recipes = []
     all_rows = SHEET.worksheet("recipes").get_all_values()
     for row in all_rows:
-        if recipe_name.lower() in row[1].lower():  # Assuming recipe names are in the first column
+        if recipe_name.lower() in row[1].lower(): 
             recipes.append(row)
     return recipes
-
-# def print_headers():
-#     headers = SHEET.worksheet("recipes").row_values(1)
-#     for header in headers:
-#         print(header)
 
 def check_recipe():
     os.system('cls')
 
     print("Would you like a specific recipe or a suggestion? \n")
     print("1. View all recipes")
-    print("2. Suggestion")
+    print("2. Specific Recipe")
 
     while True:
         user_option = input("Enter your answer here:").strip()
         if user_option == "1":
-            # print("Ok! Enter the recipe name here and we're going to see if we have it!\n")
-            # input("Check recipe:")
             all_recipes = SHEET.worksheet("recipes").get_all_values()
             pprint(tabulate(all_recipes))
 
         elif user_option == "2":
-            # recipe_suggestion()
-            # recipe_name = recipes.col_values(1)
-            # print(tabulate(recipe_name))
-
-            # recipes = SHEET.worksheet("recipes")
-            # columns = []
-            # for ind in range(2, 5):
-            #     column = recipes.col_values(ind)
-            #     columns.append(column)
-            
-            # return columns
-            recipe_name = input("Enter the recipe name to search: ")
+            print("Ok! Enter the recipe name here and we're going to see if we have it!\n")
+            recipe_name = input("Check Recipe:")
             found_recipes = search_recipe_by_name(recipe_name)
-
-            #  print_headers()
 
             headers = ["Type", "Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
 
@@ -98,17 +71,9 @@ def check_recipe():
                 recipe_row = found_recipes[0]
                 print("\nRecipe Details:")
                 recipe_table = tabulate([recipe_row], headers=headers, tablefmt="pretty")
-                print(recipe_table)
-                #  for recipe_row in found_recipes:
-                    
-                    #  for detail in recipe_row:
-                        #  recipe_table = tabulate([recipe_row], headers=headers, tablefmt="pretty")
-                        #  print(recipe_table)
-                    
+                print(recipe_table)          
             else:
                 print("No recipes found with that name.")
-
-
         elif user_option == "exit":
             os.system('cls')
             initial_page()
@@ -163,16 +128,7 @@ def add_recipe():
 
     print("Ok! Then we'll need you to give us some information...")
 
-    user_details = input("Name and Surname:").isalpha() #isaplha not working
-
-     
-     #while True:
-        #if not user_details.isalpha():
-           # continue
-        #else:
-            #print('its finally working;;;')            
-        
-     
+    user_details = input("Name and Surname:")
     recipe_name = input("Name of the recipe:")
     ingredients_list = input("What are the ingredients?")
     recipe_preparation = input("How we prepare the recipe?")
@@ -188,14 +144,14 @@ def add_recipe():
         """)
      
     print("Please, make sure you added all information right.\n")
-    print("1. Edit")
-    print("2. Confirm")
+    print("1. Confirm")
+    print("2. Edit")
 
     while True:
         user_option = input("Enter your answer here:").strip()
-        if user_option == "1": #confirming for now
-            print("option 1 working")
-            break
+        if user_option == "1": 
+            break        
+        elif user_option == "2": 
             #  print("Ok! What would you like to edit?\n")
             #  print("1. Name\n 2. Recipe name\n 3.Ingredients\n 4.Recipe type\n 5. Recipe favorite")
             #  edit_answer = input("Enter your answer here:").isaplha() #caracteres precisam ser alpha
@@ -203,8 +159,7 @@ def add_recipe():
             #          if edit_answer == "1":
             #             print("ok")#colocar só pra editar um ponto
             #          else:
-            #             continue         
-        elif user_option == "2": #editing for now
+            #             continue 
             print("What would you like to edit? \n 1. Name and surname \n 2. recipe's name")
             edit_recipe = input("Enter your option here:")
             if edit_recipe == "1":
@@ -226,12 +181,6 @@ def add_recipe():
     data_list = (user_details, recipe_name, ingredients_list, recipe_preparation, recipe_type)
     recipes.append_row(data_list)
     print("updated completed.")
-
-    #check the information
-    #confirmar a adição da receita
-    #agradecer e menu inicial
-
-# update_worksheet()
 
 def main():
     """

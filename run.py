@@ -73,6 +73,15 @@ def check_recipe():
             for row in all_recipes:
                 tables.add_row(row)
             print(tables)
+
+            print("1. Main menu")
+            print("2. Exit program")
+            user_option = input("Enter here your option:").strip().lower()
+            while True:
+                if user_option == "1":
+                    main()
+                elif user_option == "2":
+                    exit_program()
         elif user_option == "2":
             recipe_suggestion()
         elif user_option == "3":
@@ -94,7 +103,16 @@ def check_recipe():
 
                 for row in found_recipes:
                     tables.add_row(row)
-                print(tables)       
+                print(tables)
+
+                print("1. Main menu")
+                print("2. Exit program")
+                user_option = input("Enter here your option:").strip().lower()
+                while True:
+                    if user_option == "1":
+                        main()
+                    elif user_option == "2":
+                        exit_program()       
             else:
                 print("No recipes found with that name.")
         elif user_option == "exit":
@@ -124,28 +142,26 @@ def recipe_suggestion():
         tables.add_row(random_recipe)
         print(tables)
 
-    print("Are you happy with this one or should we recommend another one?")
-    print("Enter NEW for another recommendation")
-    print("Enter EXIT to go back to main menu.")
+        print("Enter what you want to do next:")
+        print("NEW - another recommendation.")
+        print("MENU - go back to main menu.")
+        print("EXIT - exit the program.")
 
-    while True:
-        user_option = input("Enter your answer here:").strip().lower()
-        if user_option == "new":
-            
-            os.system('clear')
-            recipe_suggestion()
-        elif user_option == "exit":
-            
-            os.system('clear')
-            main()
-        else:
-            print('Please, enter a valid option to continue.')
-            continue
+        while True:
+            user_option = input("Enter your answer here:").strip().lower()
+            if user_option == "new":
+                os.system('clear')
+                recipe_suggestion()
+            elif user_option == "menu":
+                
+                os.system('clear')
+                main()
+            elif user_option == "exit":
+                exit_program()
+            else:
+                print('Please, enter a valid option to continue.')
+                continue
 
-def update_table():
-    data_list = (user_details, recipe_name, ingredients_list, recipe_preparation, recipe_type)
-    recipes.append_row(data_list)
-    print("Update completed.")
 
 def editing():
     print("""
@@ -179,9 +195,18 @@ def editing():
             if user_option == "confirm":
                 print("Ok! Thank you so much for your contribution!\n Updating...")
                 time.sleep(0.05)
-                data_list = (name_update, recipe_name, ingredients_list, recipe_preparation, recipe_type)
+                data_list = (name_update, recipe_name, ingredients_list, recipe_preparation, recipe_favorite)
                 recipes.append_row(data_list)
                 print("Update completed.")
+
+                print("1. Main menu")
+                print("2. Exit program")
+                user_option = input("Enter here your option:").strip().lower()
+                while True:
+                    if user_option == "1":
+                        main()
+                    elif user_option == "2":
+                        exit_program()
             elif user_option == "edit":
                 editing()
             elif user_option == "exit":
@@ -214,6 +239,15 @@ def editing():
                 data_list = (name_update, recipe_update, ingredients_list, recipe_preparation, recipe_favorite)
                 recipes.append_row(data_list)
                 print("Update completed.")
+
+                print("1. Main menu")
+                print("2. Exit program")
+                user_option = input("Enter here your option:").strip().lower()
+                while True:
+                    if user_option == "1":
+                        main()
+                    elif user_option == "2":
+                        exit_program()
             elif user_option == "edit":
                 editing()
             elif user_option == "exit":
@@ -246,6 +280,14 @@ def editing():
                 data_list = (name_update, recipe_update, ingredients_update, recipe_preparation, recipe_favorite)
                 recipes.append_row(data_list)
                 print("Update completed.")
+                print("1. Main menu")
+                print("2. Exit program")
+                user_option = input("Enter here your option:").strip().lower()
+                while True:
+                    if user_option == "1":
+                        main()
+                    elif user_option == "2":
+                        exit_program()
             elif user_option == "edit":
                 editing()
             elif user_option == "exit":
@@ -278,6 +320,14 @@ def editing():
                 data_list = (name_update, recipe_update, ingredients_update, preparation_update, recipe_favorite)
                 recipes.append_row(data_list)
                 print("Update completed.")
+                print("1. Main menu")
+                print("2. Exit program")
+                user_option = input("Enter here your option:").strip().lower()
+                while True:
+                    if user_option == "1":
+                        main()
+                    elif user_option == "2":
+                        exit_program()
             elif user_option == "edit":
                 editing()
             elif user_option == "exit":
@@ -309,6 +359,14 @@ def editing():
                 time.sleep(0.05)
                 data_list = (name_update, recipe_update, ingredients_update, preparation_update, favorite_update)
                 recipes.append_row(data_list)
+                print("1. Main menu")
+                print("2. Exit program")
+                user_option = input("Enter here your option:").strip().lower()
+                while True:
+                    if user_option == "1":
+                        main()
+                    elif user_option == "2":
+                        exit_program()
                 print("Update completed.")
             elif user_option == "edit":
                 editing()
@@ -350,7 +408,18 @@ def add_recipe():
     while True:
         user_option = input("Enter your answer here:").strip().lower()
         if user_option == "1": 
-            update_table()        
+            data_list = (user_details, recipe_name, ingredients_list, recipe_preparation, recipe_favorite)
+            recipes.append_row(data_list)
+            print("Recipe added.")
+
+            print("1. Main menu")
+            print("2. Exit program")
+            user_option = input("Enter here your option:").strip().lower()
+            while True:
+                if user_option == "1":
+                    main()
+                elif user_option == "2":
+                    exit_program()        
         elif user_option == "2":
             editing()
         elif user_option == "exit":
@@ -359,6 +428,10 @@ def add_recipe():
         else:
             print('Please, enter a valid option to continue.')
             print("Or you can enter EXIT to go back to the initial menu.")
+
+def exit_program():
+    print("Exiting the program...")
+    sys.exit(0)
 
 def main():
     """

@@ -1,11 +1,8 @@
 import os
 import gspread
 from google.oauth2.service_account import Credentials
-from pprint import pprint
 from random import randint
 from prettytable import PrettyTable
-from tabulate import tabulate
-
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -21,29 +18,29 @@ SHEET = GSPREAD_CLIENT.open('family_favorites')
 recipes = SHEET.worksheet('recipes')
 
 def initial_page():
+
     """
+
     Ask what the user wants to do
+
     """
     print("\nWhat would you like to do? \n")
     print("1. Check a recipe")
     print("2. Add a new one\n")
-    print("3. test\n")
     
     while True:
         user_option = input("Enter your answer here:").strip()
         if user_option == "1":
-            print("Ok! Let's do it!\n")
+            print("Ok! Let's check what we have here!\n")
             check_recipe()
         elif user_option == "2":
+            print("HMMMM! New recipe coming!\n")
             add_recipe()
-        elif user_option == "3":
-            recipe_suggestion()
         else:
             print('Please, enter 1 or 2 to continue.')
             continue
 
-def search_recipe_by_name(recipe_name):
-     
+def search_recipe_by_name(recipe_name):    
     recipes = []
     all_rows = SHEET.worksheet("recipes").get_all_values()
     for row in all_rows:
@@ -56,7 +53,9 @@ def check_recipe():
 
     print("Would you like a specific recipe or a suggestion? \n")
     print("1. View all recipes")
-    print("2. Specific Recipe")
+    print("2. Suggestion Recipe")
+    print("3. Specific Recipe\n")
+    print("Enter EXIT to go back to main menu.")
 
     while True:
         user_option = input("Enter your answer here:").strip()
@@ -73,8 +72,9 @@ def check_recipe():
             for row in all_recipes:
                 tables.add_row(row)
             print(tables)
-
         elif user_option == "2":
+            recipe_suggestion()
+        elif user_option == "3":
             print("Ok! Enter the recipe name here and we're going to see if we have it!\n")
             recipe_name = input("Check Recipe:")
             found_recipes = search_recipe_by_name(recipe_name)
@@ -108,56 +108,38 @@ def recipe_suggestion():
     import os
     os.system('cls')
 
-    print("Would you like a savoury or a sweet recipe?\n")
-    print("1. Savoury")
-    print("2. Sweet")
-    print("3. I don't know, give me a light!")
-    print("4. Back to previous menu")
-    print("Enter 'exit' to go to initial menu\n")
+    print("Ok! I think you you'll like this one:\n")
+    all_recipes = SHEET.worksheet("recipes").get_all_values()         
+        
+    if len(all_recipes) > 1:
+        headers = ["Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
+        random_index = randint(1, len(all_recipes)-1)  
+        random_recipe = all_recipes[random_index - 1]
+                
+        tables = PrettyTable()
+        tables.field_names = headers
+        tables.max_width = 30
+        tables.align = "l"
+
+        tables.add_row(random_recipe)
+        print(tables)
+
+    print("Are you happy with this one or should we recommend another one?")
+    print("Enter [new] for another recommendation")
+    print("Enter EXIT to go back to main menu.")
 
     while True:
-        user_option = input("Enter your answer here:").strip()
-        if user_option == "1":
-            recipes = SHEET.worksheet("recipes").get_all_values()
-            for row in recipes:
-                if user_option in recipes:
-                    print("working")
-            # print("Ok! Our today suggestion is:\n")
-            # recipes = SHEET.worksheet("recipes").row_values()
-            # print(random.choice(recipes))
-        elif user_option == "2":
-            all_recipes = SHEET.worksheet("recipes").get_all_values()
-            print("Ok! Today will have this for desert:\n")
-            
-            if len(all_recipes) > 1:
-                headers = ["Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
-                random_index = randint(1, len(all_recipes)-1)  
-                random_recipe = all_recipes[random_index - 1]
-                
-                tables = PrettyTable()
-                tables.field_names = headers
-                tables.max_width = 30
-                tables.align = "l"
-
-                tables.add_row(random_recipe)
-                print(tables)    
-                # random_recipe_table = tabulate([random_recipe], headers=headers, tablefmt="pretty")
-                # print(random_recipe_table)
-            #put random sweet recipe
-        elif user_option == "3":
-            print("Ok... but don't blame me if you don't like it...\n")
-            #put random recipe
-        elif user_option == "4":
+        user_option = input("Enter your answer here:")
+        if user_option == "new":
             import os
             os.system('cls')
-            check_recipe()
+            recipe_suggestion()
         elif user_option == "exit":
             import os
             os.system('cls')
             initial_page()
         else:
             print('Please, enter a valid option to continue.')
-            print("Or you can enter 'exit' to go back to the initial menu.")
             continue
 
 def update_table():
@@ -261,23 +243,16 @@ def main():
     """
     initial_page()
 
-print("""
- 
-
-  _____               _ _                  
- |  ___|_ _ _ __ ___ (_) |_   _            
- | |_ / _` | '_ ` _ \| | | | | |           
- |  _| (_| | | | | | | | | |_| |           
- |_|  \__,_|_| |_| |_|_|_|\__, |           
-                          |___/            
-  _____                     _ _            
- |  ___|_ ___   _____  _ __(_) |_ ___  ___ 
- | |_ / _` \ \ / / _ \| '__| | __/ _ \/ __|
- |  _| (_| |\ V / (_) | |  | | ||  __/\__ \
- |_|  \__,_| \_/ \___/|_|  |_|\__\___||___/
+print("  _____               _ _                  ")
+print(" |  ___|_ _ _ __ ___ (_) |_   _            ")
+print(" | |_ / _` | '_ ` _ \| | | | | |           ")
+print(" |  _| (_| | | | | | | | | |_| |           ")
+print(" |_|  \__,_|_| |_| |_|_|_|\__, |           ")
+print("                          |___/            ")
+print("  _____                     _ _            ")
+print(" |  ___|_ ___   _____  _ __(_) |_ ___  ___ ")
+print(" | |_ / _` \ \ / / _ \| '__| | __/ _ \/ __|")
+print(" |  _| (_| |\ V / (_) | |  | | ||  __/\__ \\")
+print(" |_|  \__,_| \_/ \___/|_|  |_|\__\___||___/")
                                            
-
- 
- \n
- """)
 main()

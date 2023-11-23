@@ -18,12 +18,13 @@ SHEET = GSPREAD_CLIENT.open('family_favorites')
 recipes = SHEET.worksheet('recipes')
 
 def initial_page():
-
     """
 
     Ask what the user wants to do
 
     """
+    os.system('clear')
+
     print("\nWhat would you like to do? \n")
     print("1. Check a recipe")
     print("2. Add a new one\n")
@@ -49,7 +50,7 @@ def search_recipe_by_name(recipe_name):
     return recipes
 
 def check_recipe():
-    os.system('cls')
+    os.system('clear')
 
     print("Would you like a specific recipe or a suggestion? \n")
     print("1. View all recipes")
@@ -97,7 +98,7 @@ def check_recipe():
             else:
                 print("No recipes found with that name.")
         elif user_option == "exit":
-            os.system('cls')
+            os.system('clear')
             main()
         else:
             print('Please, enter 1 or 2 to continue.')
@@ -105,8 +106,7 @@ def check_recipe():
             continue
 
 def recipe_suggestion():
-    import os
-    os.system('cls')
+    os.system('clear')
 
     print("Ok! I think you you'll like this one:\n")
     all_recipes = SHEET.worksheet("recipes").get_all_values()         
@@ -129,14 +129,14 @@ def recipe_suggestion():
     print("Enter EXIT to go back to main menu.")
 
     while True:
-        user_option = input("Enter your answer here:")..strip().lower()
+        user_option = input("Enter your answer here:").strip().lower()
         if user_option == "new":
-            import os
-            os.system('cls')
+            
+            os.system('clear')
             recipe_suggestion()
         elif user_option == "exit":
-            import os
-            os.system('cls')
+            
+            os.system('clear')
             main()
         else:
             print('Please, enter a valid option to continue.')
@@ -318,9 +318,8 @@ def editing():
                 print('Please, enter a valid option to continue.')
                 print("Or you can enter 'exit' to go back to the initial menu.")
 
-def add_recipe():
-    import os
-    os.system('cls')
+def add_recipe():   
+    os.system('clear')
 
     print("Ok! Then we'll need you to give us some information...")
 
@@ -355,8 +354,7 @@ def add_recipe():
         elif user_option == "2":
             editing()
         elif user_option == "exit":
-            import os
-            os.system('cls')
+            os.system('clear')
             main()
         else:
             print('Please, enter a valid option to continue.')
@@ -365,19 +363,27 @@ def add_recipe():
 def main():
     """
     run all program functions
-    """
-    initial_page()
 
-print("  _____               _ _                  ")
-print(" |  ___|_ _ _ __ ___ (_) |_   _            ")
-print(" | |_ / _` | '_ ` _ \| | | | | |           ")
-print(" |  _| (_| | | | | | | | | |_| |           ")
-print(" |_|  \__,_|_| |_| |_|_|_|\__, |           ")
-print("                          |___/            ")
-print("  _____                     _ _            ")
-print(" |  ___|_ ___   _____  _ __(_) |_ ___  ___ ")
-print(" | |_ / _` \ \ / / _ \| '__| | __/ _ \/ __|")
-print(" |  _| (_| |\ V / (_) | |  | | ||  __/\__ \\")
-print(" |_|  \__,_| \_/ \___/|_|  |_|\__\___||___/")
+    """
+    print(" WELCOME TO\n")
+    print("  _____               _ _                  ")
+    print(" |  ___|_ _ _ __ ___ (_) |_   _            ")
+    print(" | |_ / _` | '_ ` _ \| | | | | |           ")
+    print(" |  _| (_| | | | | | | | | |_| |           ")
+    print(" |_|  \__,_|_| |_| |_|_|_|\__, |           ")
+    print("                          |___/            ")
+    print("  _____                     _ _            ")
+    print(" |  ___|_ ___   _____  _ __(_) |_ ___  ___ ")
+    print(" | |_ / _` \ \ / / _ \| '__| | __/ _ \/ __|")
+    print(" |  _| (_| |\ V / (_) | |  | | ||  __/\__ \\")
+    print(" |_|  \__,_| \_/ \___/|_|  |_|\__\___||___/")
+
+    print("""\nThis a heartfelt family recipe book where
+    we can share are favorite recipes!
+    This is a gift to our future generation who will
+    be able to prepare the most special recipes.\n
+    """)
+    input("Press Enter to continue...")
+    initial_page()
                                            
 main()

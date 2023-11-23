@@ -116,7 +116,6 @@ def recipe_suggestion():
                 random_index = randint(1, len(all_recipes)-1)  
                 random_recipe = all_recipes[random_index - 1]
                 
-
                 headers = ["Type", "Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
                 random_recipe_table = tabulate([random_recipe], headers=headers, tablefmt="pretty")
                 print(random_recipe_table)
@@ -137,17 +136,71 @@ def recipe_suggestion():
             print("Or you can enter 'exit' to go back to the initial menu.")
             continue
 
+def update_table():
+    data_list = (user_details, recipe_name, ingredients_list, recipe_preparation, recipe_type)
+    recipes.append_row(data_list)
+    print("updated completed.")
+
+def editing():
+                print("What would you like to edit? \n 1. Name and surname \n 2. recipe's name\n 3.Ingredients\n 4.Recipe type\n 5. Recipe favorite")
+                edit_recipe = input("Enter your option here:")
+                if edit_recipe == "1":
+                    print('Recipe name: {recipe_name}')
+                    new_update = input("New recipe name:")
+                    # update_cell = SHEET.worksheet("recipes").update('B2', "{new_update}")
+                    print(f"""
+                        Recipe name: {new_update}
+                        Ingredients List: {ingredients_list}
+                        Recipe Preparation: {recipe_preparation}
+                        Recipe Type: {recipe_type}
+                        Recipe Favorite: {recipe_favorite}
+                        """)
+
+                    print("Please, make sure you added all information right.\n")
+                    print("1. Confirm")
+                    print("2. Edit")
+
+                    user_option = input("Enter your answer here:").strip()
+                    
+                    if user_option == "1":
+                        print("thank you")
+                        data_list = (new_update, recipe_name, ingredients_list, recipe_preparation, recipe_type)
+                        recipes.append_row(data_list)
+                        print("updated completed.")
+                    elif user_option == "2":
+                        editing()
+                    else:
+                        print('Please, enter a valid option to continue.')
+                        print("Or you can enter 'exit' to go back to the initial menu.")
+                        # continue
+                elif edit_recipe == "2":
+                    print("option working")
+                elif edit_recipe == "3":
+                    print("option working")
+                elif edit_recipe == "4":
+                    print("option working")
+                elif edit_recipe == "5":
+                    print("option working")
+                
+                    print("Ok! Thank you so much for your contribution!\n")
+
 def add_recipe():
     import os
     os.system('cls')
 
     print("Ok! Then we'll need you to give us some information...")
 
+    global user_details
     user_details = input("Name and Surname:")
+    global recipe_name 
     recipe_name = input("Name of the recipe:")
+    global ingredients_list
     ingredients_list = input("What are the ingredients?")
+    global recipe_preparation
     recipe_preparation = input("How we prepare the recipe?")
-    recipe_type = input("Is it savoury or sweet?") #IT HAS TO BE SAVOURY OR SWEET ONLY
+    global recipe_type #IT HAS TO BE SAVOURY OR SWEET ONLY
+    recipe_type = input("Is it savoury or sweet?")
+    global recipe_favorite
     recipe_favorite = input("This recipe is who's favorite?")
 
     print(f"""
@@ -165,8 +218,10 @@ def add_recipe():
     while True:
         user_option = input("Enter your answer here:").strip()
         if user_option == "1": 
-            break        
-        elif user_option == "2": 
+            update_table()        
+        elif user_option == "2":
+            editing()
+
             #  print("Ok! What would you like to edit?\n")
             #  print("1. Name\n 2. Recipe name\n 3.Ingredients\n 4.Recipe type\n 5. Recipe favorite")
             #  edit_answer = input("Enter your answer here:").isaplha() #caracteres precisam ser alpha
@@ -175,15 +230,7 @@ def add_recipe():
             #             print("ok")#colocar só pra editar um ponto
             #          else:
             #             continue 
-            print("What would you like to edit? \n 1. Name and surname \n 2. recipe's name")
-            edit_recipe = input("Enter your option here:")
-            if edit_recipe == "1":
-                print("it's working")
-            elif edit_recipe == "2":
-                print("option working")
-             
-            print("Ok! Thank you so much for your contribution!\n")
-             #update worksheet
+                #update worksheet
         elif user_option == "exit":
             import os
             os.system('cls')
@@ -191,11 +238,7 @@ def add_recipe():
         else:
             print('Please, enter a valid option to continue.')
             print("Or you can enter 'exit' to go back to the initial menu.")
-            continue
-    
-    data_list = (user_details, recipe_name, ingredients_list, recipe_preparation, recipe_type)
-    recipes.append_row(data_list)
-    print("updated completed.")
+                    # continue
 
 def main():
     """

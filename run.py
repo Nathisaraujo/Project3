@@ -58,7 +58,7 @@ def check_recipe():
     print("Enter EXIT to go back to main menu.")
 
     while True:
-        user_option = input("Enter your answer here:").strip()
+        user_option = input("Enter your answer here:").strip().lower()
         if user_option == "1":
             headers = ["Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
 
@@ -98,7 +98,7 @@ def check_recipe():
                 print("No recipes found with that name.")
         elif user_option == "exit":
             os.system('cls')
-            initial_page()
+            main()
         else:
             print('Please, enter 1 or 2 to continue.')
             print("Or you can enter 'exit' to go back to the initial menu.")
@@ -125,11 +125,11 @@ def recipe_suggestion():
         print(tables)
 
     print("Are you happy with this one or should we recommend another one?")
-    print("Enter [new] for another recommendation")
+    print("Enter NEW for another recommendation")
     print("Enter EXIT to go back to main menu.")
 
     while True:
-        user_option = input("Enter your answer here:")
+        user_option = input("Enter your answer here:")..strip().lower()
         if user_option == "new":
             import os
             os.system('cls')
@@ -137,7 +137,7 @@ def recipe_suggestion():
         elif user_option == "exit":
             import os
             os.system('cls')
-            initial_page()
+            main()
         else:
             print('Please, enter a valid option to continue.')
             continue
@@ -145,7 +145,7 @@ def recipe_suggestion():
 def update_table():
     data_list = (user_details, recipe_name, ingredients_list, recipe_preparation, recipe_type)
     recipes.append_row(data_list)
-    print("updated completed.")
+    print("Update completed.")
 
 def editing():
     print("""
@@ -156,6 +156,7 @@ def editing():
         4. Preparation\n 
         5. Recipe favorite\n""")
     edit_recipe = input("Enter your option here:")
+    print("You can enter EXIT to go back to main menu")
     if edit_recipe == "1":
         print(f'First name: {user_details}')
         global name_update
@@ -169,11 +170,11 @@ def editing():
                 """)
 
         print("\nPlease, make sure you added all information right.")
-        print("Confirm")
-        print("Edit")
+        print("1. Confirm")
+        print("2. Edit")
 
         while True:
-            user_option = input("Enter your answer here:").strip()
+            user_option = input("Enter your answer here:").strip().lower()
                     
             if user_option == "confirm":
                 print("Ok! Thank you so much for your contribution!\n Updating...")
@@ -183,6 +184,8 @@ def editing():
                 print("Update completed.")
             elif user_option == "edit":
                 editing()
+            elif user_option == "exit":
+                main()
             else:
                 print('Please, enter a valid option to continue.')
                 print("Or you can enter 'exit' to go back to the initial menu.")
@@ -203,7 +206,7 @@ def editing():
         print("Edit")
 
         while True:
-            user_option = input("Enter your answer here:").strip()
+            user_option = input("Enter your answer here:").strip().lower()
                     
             if user_option == "confirm":
                 print("Ok! Thank you so much for your contribution!\n Updating...")
@@ -213,6 +216,8 @@ def editing():
                 print("Update completed.")
             elif user_option == "edit":
                 editing()
+            elif user_option == "exit":
+                main()
             else:
                 print('Please, enter a valid option to continue.')
                 print("Or you can enter 'exit' to go back to the initial menu.")
@@ -233,7 +238,7 @@ def editing():
         print("Edit")
 
         while True:
-            user_option = input("Enter your answer here:").strip()
+            user_option = input("Enter your answer here:").strip().lower()
                     
             if user_option == "confirm":
                 print("Ok! Thank you so much for your contribution!\n Updating...")
@@ -243,6 +248,8 @@ def editing():
                 print("Update completed.")
             elif user_option == "edit":
                 editing()
+            elif user_option == "exit":
+                main()
             else:
                 print('Please, enter a valid option to continue.')
                 print("Or you can enter 'exit' to go back to the initial menu.")
@@ -263,7 +270,7 @@ def editing():
         print("Edit")
 
         while True:
-            user_option = input("Enter your answer here:").strip()
+            user_option = input("Enter your answer here:").strip().lower()
                     
             if user_option == "confirm":
                 print("Ok! Thank you so much for your contribution!\n Updating...")
@@ -273,6 +280,8 @@ def editing():
                 print("Update completed.")
             elif user_option == "edit":
                 editing()
+            elif user_option == "exit":
+                main()
             else:
                 print('Please, enter a valid option to continue.')
                 print("Or you can enter 'exit' to go back to the initial menu.")
@@ -293,7 +302,7 @@ def editing():
         print("Edit")
 
         while True:
-            user_option = input("Enter your answer here:").strip()
+            user_option = input("Enter your answer here:").strip().lower()
                     
             if user_option == "confirm":
                 print("Ok! Thank you so much for your contribution!\n Updating...")
@@ -303,6 +312,8 @@ def editing():
                 print("Update completed.")
             elif user_option == "edit":
                 editing()
+            elif user_option == "exit":
+                main()
             else:
                 print('Please, enter a valid option to continue.')
                 print("Or you can enter 'exit' to go back to the initial menu.")
@@ -314,15 +325,13 @@ def add_recipe():
     print("Ok! Then we'll need you to give us some information...")
 
     global user_details
-    user_details = input("Name and Surname:")
+    user_details = input("First name:")
     global recipe_name 
     recipe_name = input("Name of the recipe:")
     global ingredients_list
     ingredients_list = input("What are the ingredients?")
     global recipe_preparation
     recipe_preparation = input("How we prepare the recipe?")
-    global recipe_type #IT HAS TO BE SAVOURY OR SWEET ONLY
-    recipe_type = input("Is it savoury or sweet?")
     global recipe_favorite
     recipe_favorite = input("This recipe is who's favorite?")
 
@@ -331,16 +340,16 @@ def add_recipe():
         Recipe name: {recipe_name}
         Ingredients List: {ingredients_list}
         Recipe Preparation: {recipe_preparation}
-        Recipe Type: {recipe_type}
         Recipe Favorite: {recipe_favorite}
         """)
      
     print("Please, make sure you added all information right.\n")
     print("1. Confirm")
     print("2. Edit")
+    print("You can enter EXIT to go back to main menu")
 
     while True:
-        user_option = input("Enter your answer here:").strip()
+        user_option = input("Enter your answer here:").strip().lower()
         if user_option == "1": 
             update_table()        
         elif user_option == "2":
@@ -348,11 +357,10 @@ def add_recipe():
         elif user_option == "exit":
             import os
             os.system('cls')
-            initial_page()
+            main()
         else:
             print('Please, enter a valid option to continue.')
-            print("Or you can enter 'exit' to go back to the initial menu.")
-                    # continue
+            print("Or you can enter EXIT to go back to the initial menu.")
 
 def main():
     """

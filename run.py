@@ -38,21 +38,21 @@ def initial_page():
             continue
 
 class Recipe:
-     def __init__(self, recipe_name, ingredients_list, recipe_preparation, recipe_type, recipe_favorite):
-         self.recipe_name = recipe_name
-         self.ingredients_list = ingredients_list
-         self.recipe_preparation = recipe_preparation
-         self.recipe_type = recipe_type
-         self.recipe_favorite = recipe_favorite
+    def __init__(self, recipe_name, ingredients_list, recipe_preparation, recipe_type, recipe_favorite):
+        self.recipe_name = recipe_name
+        self.ingredients_list = ingredients_list
+        self.recipe_preparation = recipe_preparation
+        self.recipe_type = recipe_type
+        self.recipe_favorite = recipe_favorite
 
 def search_recipe_by_name(recipe_name):
      
-     recipes = []
-     all_rows = SHEET.worksheet("recipes").get_all_values()
-     for row in all_rows:
-         if recipe_name.lower() in row[1].lower():  # Assuming recipe names are in the first column
+    recipes = []
+    all_rows = SHEET.worksheet("recipes").get_all_values()
+    for row in all_rows:
+        if recipe_name.lower() in row[1].lower():  # Assuming recipe names are in the first column
             recipes.append(row)
-     return recipes
+    return recipes
 
 # def print_headers():
 #     headers = SHEET.worksheet("recipes").row_values(1)
@@ -86,27 +86,27 @@ def check_recipe():
             #     columns.append(column)
             
             # return columns
-             recipe_name = input("Enter the recipe name to search: ")
-             found_recipes = search_recipe_by_name(recipe_name)
+            recipe_name = input("Enter the recipe name to search: ")
+            found_recipes = search_recipe_by_name(recipe_name)
 
             #  print_headers()
 
-             headers = ["Type", "Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
+            headers = ["Type", "Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
 
-             if found_recipes:
-                 print(f"Found {len(found_recipes)} matching recipes:")
-                 recipe_row = found_recipes[0]
-                 print("\nRecipe Details:")
-                 recipe_table = tabulate([recipe_row], headers=headers, tablefmt="pretty")
-                 print(recipe_table)
+            if found_recipes:
+                print(f"Found {len(found_recipes)} matching recipes:")
+                recipe_row = found_recipes[0]
+                print("\nRecipe Details:")
+                recipe_table = tabulate([recipe_row], headers=headers, tablefmt="pretty")
+                print(recipe_table)
                 #  for recipe_row in found_recipes:
                     
                     #  for detail in recipe_row:
                         #  recipe_table = tabulate([recipe_row], headers=headers, tablefmt="pretty")
                         #  print(recipe_table)
                     
-             else:
-                 print("No recipes found with that name.")
+            else:
+                print("No recipes found with that name.")
 
 
         elif user_option == "exit":
@@ -158,42 +158,42 @@ def recipe_suggestion():
             continue
 
 def add_recipe():
-     import os
-     os.system('cls')
+    import os
+    os.system('cls')
 
-     print("Ok! Then we'll need you to give us some information...")
+    print("Ok! Then we'll need you to give us some information...")
 
-     user_details = input("Name and Surname:").isalpha() #isaplha not working
+    user_details = input("Name and Surname:").isalpha() #isaplha not working
 
-     """
-     while True:
-        if not user_details.isalpha():
-            continue
-        else:
-            print('its finally working;;;')            
-        
-     """
-     recipe_name = input("Name of the recipe:")
-     ingredients_list = input("What are the ingredients?")
-     recipe_preparation = input("How we prepare the recipe?")
-     recipe_type = input("Is it savoury or sweet?") #IT HAS TO BE SAVOURY OR SWEET ONLY
-     recipe_favorite = input("This recipe is who's favorite?")
-
-     print(f"""
-         Recipe name: {recipe_name}
-         Ingredients List: {ingredients_list}
-         Recipe Preparation: {recipe_preparation}
-         Recipe Type: {recipe_type}
-         Recipe Favorite: {recipe_favorite}
-            """)
      
-     print("Please, make sure you added all information right.\n")
-     print("1. Edit")
-     print("2. Confirm")
+     #while True:
+        #if not user_details.isalpha():
+           # continue
+        #else:
+            #print('its finally working;;;')            
+        
+     
+    recipe_name = input("Name of the recipe:")
+    ingredients_list = input("What are the ingredients?")
+    recipe_preparation = input("How we prepare the recipe?")
+    recipe_type = input("Is it savoury or sweet?") #IT HAS TO BE SAVOURY OR SWEET ONLY
+    recipe_favorite = input("This recipe is who's favorite?")
 
-     while True:
-         user_option = input("Enter your answer here:").strip()
-         if user_option == "1": #confirming for now
+    print(f"""
+        Recipe name: {recipe_name}
+        Ingredients List: {ingredients_list}
+        Recipe Preparation: {recipe_preparation}
+        Recipe Type: {recipe_type}
+        Recipe Favorite: {recipe_favorite}
+        """)
+     
+    print("Please, make sure you added all information right.\n")
+    print("1. Edit")
+    print("2. Confirm")
+
+    while True:
+        user_option = input("Enter your answer here:").strip()
+        if user_option == "1": #confirming for now
             print("option 1 working")
             break
             #  print("Ok! What would you like to edit?\n")
@@ -204,28 +204,28 @@ def add_recipe():
             #             print("ok")#colocar só pra editar um ponto
             #          else:
             #             continue         
-         elif user_option == "2": #editing for now
-             print("What would you like to edit? \n 1. Name and surname \n 2. recipe's name")
-             edit_recipe = input("Enter your option here:")
-             if edit_recipe == "1":
-                 print("it's working")
-             elif edit_recipe == "2":
-                 print("option working")
+        elif user_option == "2": #editing for now
+            print("What would you like to edit? \n 1. Name and surname \n 2. recipe's name")
+            edit_recipe = input("Enter your option here:")
+            if edit_recipe == "1":
+                print("it's working")
+            elif edit_recipe == "2":
+                print("option working")
              
-             print("Ok! Thank you so much for your contribution!\n")
+            print("Ok! Thank you so much for your contribution!\n")
              #update worksheet
-         elif user_option == "exit":
-             import os
-             os.system('cls')
-             initial_page()
-         else:
-             print('Please, enter a valid option to continue.')
-             print("Or you can enter 'exit' to go back to the initial menu.")
-             continue
+        elif user_option == "exit":
+            import os
+            os.system('cls')
+            initial_page()
+        else:
+            print('Please, enter a valid option to continue.')
+            print("Or you can enter 'exit' to go back to the initial menu.")
+            continue
     
-     data_list = (user_details, recipe_name, ingredients_list, recipe_preparation, recipe_type)
-     recipes.append_row(data_list)
-     print("updated completed.")
+    data_list = (user_details, recipe_name, ingredients_list, recipe_preparation, recipe_type)
+    recipes.append_row(data_list)
+    print("updated completed.")
 
     #check the information
     #confirmar a adição da receita
@@ -239,5 +239,23 @@ def main():
     """
     initial_page()
 
-print("Welcome to family favorites")
+print("""
+ 
+
+  _____               _ _                  
+ |  ___|_ _ _ __ ___ (_) |_   _            
+ | |_ / _` | '_ ` _ \| | | | | |           
+ |  _| (_| | | | | | | | | |_| |           
+ |_|  \__,_|_| |_| |_|_|_|\__, |           
+                          |___/            
+  _____                     _ _            
+ |  ___|_ ___   _____  _ __(_) |_ ___  ___ 
+ | |_ / _` \ \ / / _ \| '__| | __/ _ \/ __|
+ |  _| (_| |\ V / (_) | |  | | ||  __/\__ \
+ |_|  \__,_| \_/ \___/|_|  |_|\__\___||___/
+                                           
+
+ 
+ \n
+ """)
 main()

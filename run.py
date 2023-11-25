@@ -31,7 +31,7 @@ def initial_page():
     Ask what the user wants to do
 
     """
-    os.system('clear')
+    clear_console()
 
     print("\nWhat would you like to do? \n")
     print("1. Check a recipe")
@@ -60,9 +60,9 @@ def search_recipe_by_name(recipe_name):
     return recipes
 
 def check_recipe():
-    os.system('clear')
+    clear_console()
 
-    print("Would you like a specific recipe or a suggestion? \n")
+    print("How would you like to finde a recipe?\n")
     print("1. View all recipes")
     print("2. Suggestion Recipe")
     print("3. Specific Recipe")
@@ -126,7 +126,7 @@ def next_move():
             exit_program()
 
 def recipe_suggestion():
-    os.system('clear')
+    clear_console()
 
     prPurple("Ok! I think you'll like this one:\n")
     time.sleep(0.8)
@@ -165,7 +165,7 @@ def recipe_suggestion():
                 continue
 
 def add_recipe():   
-    os.system('clear')
+    clear_console()
 
     prPurple("Ok! Then we'll need you to give us some information...")
     time.sleep(1.0)
@@ -198,7 +198,7 @@ def add_recipe():
         elif user_option == "2":
             edit_recipe()
         elif user_option == "3":
-            os.system('clear')
+            clear_console()
             main()
         elif user_option == "exit":
             exit_program()
@@ -209,7 +209,7 @@ def add_recipe():
 def edit_recipe():
     global user_details, recipe_name, ingredients_list, recipe_preparation, recipe_favorite
 
-    os.system('clear')
+    clear_console()
     prRed("Which information would you like to edit?\n")
     print("1. First name")
     print("2. Recipe name")
@@ -263,6 +263,9 @@ def confirm_recipe():
     prGreen("Recipe added.")
 
     next_move()
+
+def clear_console():
+    os.system('clear' if os.name == 'posix' else 'cls')
 
 def exit_program():
     prRed("Exiting the program...")

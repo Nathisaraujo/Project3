@@ -18,11 +18,12 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('family_favorites')
 recipes = SHEET.worksheet('recipes')
 
-def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
-def prYellow(skk): print("\033[93m {}\033[00m" .format(skk))
-def prPurple(skk): print("\033[95m {}\033[00m" .format(skk))
-def prCyan(skk): print("\033[96m {}\033[00m" .format(skk))
-def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
+class colors:
+    def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
+    def prYellow(skk): print("\033[93m {}\033[00m" .format(skk))
+    def prPurple(skk): print("\033[95m {}\033[00m" .format(skk))
+    def prCyan(skk): print("\033[96m {}\033[00m" .format(skk))
+    def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
 
 def initial_page():
     """
@@ -70,49 +71,11 @@ def check_recipe():
     while True:
         user_option = input("Enter your answer here:").strip().lower()
         if user_option == "1":
-            headers = ["Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
-
-            all_recipes = SHEET.worksheet("recipes").get_all_values()
-
-            tables = PrettyTable()
-            tables.field_names = headers
-            tables.max_width = 30
-            tables.align = "l"
-
-            for row in all_recipes:
-                tables.add_row(row)
-            print(tables)
-            next_move()
+            all_recipes()
         elif user_option == "2":
             recipe_suggestion()
         elif user_option == "3":
-            prPurple("Ok! Enter the recipe name here and we're going to see if we have it!\n")
-            recipe_name = input("Check Recipe:")
-            found_recipes = search_recipe_by_name(recipe_name)
-
-            headers = ["Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
-
-            if found_recipes:
-                print(f"Found {len(found_recipes)} matching recipes:")
-                recipe_row = found_recipes[0]
-                prCyan("\nRecipe Details:")
-
-                tables = PrettyTable()
-                tables.field_names = headers
-                tables.max_width = 30
-                tables.align = "l"
-
-                for row in found_recipes:
-                    tables.add_row(row)
-                print(tables)
-
-                next_move()     
-            else:
-                prRed("No recipes found with that name.")
-                print("Please, choose again.")
-                time.sleep(1.5)
-                check_recipe()
-
+            recipe_by_name()
         elif user_option == "4":
             os.system('clear')
             main()
@@ -123,6 +86,34 @@ def check_recipe():
             prRed("Or you can enter 'exit' to end the program.")
             continue
 
+def recipe_by_name():
+    prPurple("Ok! Enter the recipe name here and we're going to see if we have it!\n")
+    recipe_name = input("Check Recipe:")
+    found_recipes = search_recipe_by_name(recipe_name)
+
+    headers = ["Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
+
+    if found_recipes:
+        print(f"Found {len(found_recipes)} matching recipes:")
+        recipe_row = found_recipes[0]
+        prCyan("\nRecipe Details:")
+
+        tables = PrettyTable()
+        tables.field_names = headers
+        tables.max_width = 30
+        tables.align = "l"
+
+        for row in found_recipes:
+            tables.add_row(row)
+        print(tables)
+
+        next_move()     
+    else:
+        prRed("No recipes found with that name.")
+        print("Please, choose again.")
+        time.sleep(1.5)
+        check_recipe()
+            
 def next_move():
     print("What to do next?")
     print("1. Main page")

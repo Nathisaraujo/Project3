@@ -18,12 +18,12 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('family_favorites')
 recipes = SHEET.worksheet('recipes')
 
-class colors:
-    def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
-    def prYellow(skk): print("\033[93m {}\033[00m" .format(skk))
-    def prPurple(skk): print("\033[95m {}\033[00m" .format(skk))
-    def prCyan(skk): print("\033[96m {}\033[00m" .format(skk))
-    def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
+
+def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
+def prYellow(skk): print("\033[93m {}\033[00m" .format(skk))
+def prPurple(skk): print("\033[95m {}\033[00m" .format(skk))
+def prCyan(skk): print("\033[96m {}\033[00m" .format(skk))
+def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
 
 def initial_page():
     """
@@ -77,6 +77,30 @@ def check_recipe():
             prRed('Please, enter a valid option to continue.')
             prRed("Or you can enter 'exit' to end the program.")
             continue
+
+def all_recipes():
+    headers = ["Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
+
+    all_recipes = SHEET.worksheet("recipes").get_all_values()
+
+    tables = PrettyTable()
+    tables.field_names = headers
+    tables.max_width = 30
+    tables.align = "l"
+
+    for row in all_recipes:
+        tables.add_row(row)
+    print(tables)
+
+    print("What to do next?")
+    print("1. Main page")
+    print("2. Exit program")
+    user_option = input("Enter here your option:").strip().lower()
+    while True:
+        if user_option == "1":
+            main()
+        elif user_option == "2":
+            exit_program()
 
 def search_recipe_by_name(recipe_name):    
     recipes = []
@@ -263,7 +287,7 @@ def next_move():
             main()
         elif user_option == "2":
             exit_program()
-            
+
 def clear_console():
     os.system('clear' if os.name == 'posix' else 'cls')
 

@@ -51,14 +51,6 @@ def initial_page():
             prRed('Please, enter 1 or 2 to continue.')
             continue
 
-def search_recipe_by_name(recipe_name):    
-    recipes = []
-    all_rows = SHEET.worksheet("recipes").get_all_values()
-    for row in all_rows:
-        if recipe_name.lower() in row[0].lower(): 
-            recipes.append(row)
-    return recipes
-
 def check_recipe():
     clear_console()
 
@@ -85,6 +77,14 @@ def check_recipe():
             prRed('Please, enter a valid option to continue.')
             prRed("Or you can enter 'exit' to end the program.")
             continue
+
+def search_recipe_by_name(recipe_name):    
+    recipes = []
+    all_rows = SHEET.worksheet("recipes").get_all_values()
+    for row in all_rows:
+        if recipe_name.lower() in row[0].lower(): 
+            recipes.append(row)
+    return recipes
 
 def recipe_by_name():
     prPurple("Ok! Enter the recipe name here and we're going to see if we have it!\n")
@@ -113,17 +113,6 @@ def recipe_by_name():
         print("Please, choose again.")
         time.sleep(1.5)
         check_recipe()
-            
-def next_move():
-    print("What to do next?")
-    print("1. Main page")
-    print("2. Exit program")
-    user_option = input("Enter here your option:").strip().lower()
-    while True:
-        if user_option == "1":
-            main()
-        elif user_option == "2":
-            exit_program()
 
 def recipe_suggestion():
     clear_console()
@@ -264,6 +253,17 @@ def confirm_recipe():
 
     next_move()
 
+def next_move():
+    print("What to do next?")
+    print("1. Main page")
+    print("2. Exit program")
+    user_option = input("Enter here your option:").strip().lower()
+    while True:
+        if user_option == "1":
+            main()
+        elif user_option == "2":
+            exit_program()
+            
 def clear_console():
     os.system('clear' if os.name == 'posix' else 'cls')
 

@@ -16,7 +16,6 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('family_favorites')
-
 recipes = SHEET.worksheet('recipes')
 
 def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
@@ -83,16 +82,7 @@ def check_recipe():
             for row in all_recipes:
                 tables.add_row(row)
             print(tables)
-
-            print("What to do next?")
-            print("1. Main page")
-            print("2. Exit program")
-            user_option = input("Enter here your option:").strip().lower()
-            while True:
-                if user_option == "1":
-                    main()
-                elif user_option == "2":
-                    exit_program()
+            next_move()
         elif user_option == "2":
             recipe_suggestion()
         elif user_option == "3":
@@ -116,15 +106,7 @@ def check_recipe():
                     tables.add_row(row)
                 print(tables)
 
-                print("What to do next?")
-                print("1. Main menu")
-                print("2. Exit program")
-                user_option = input("Enter here your option:").strip().lower()
-                while True:
-                    if user_option == "1":
-                        main()
-                    elif user_option == "2":
-                        exit_program()       
+                next_move()     
             else:
                 prRed("No recipes found with that name.")
                 print("Please, choose again.")
@@ -140,6 +122,17 @@ def check_recipe():
             prRed('Please, enter a valid option to continue.')
             prRed("Or you can enter 'exit' to end the program.")
             continue
+
+def next_move():
+    print("What to do next?")
+    print("1. Main page")
+    print("2. Exit program")
+    user_option = input("Enter here your option:").strip().lower()
+    while True:
+        if user_option == "1":
+            main()
+        elif user_option == "2":
+            exit_program()
 
 def recipe_suggestion():
     os.system('clear')
@@ -278,15 +271,7 @@ def confirm_recipe():
     time.sleep(1.0)
     prGreen("Recipe added.")
 
-    print("What to do next?")
-    print("1. Main page")
-    print("2. Exit program")
-    user_option = input("Enter here your option:").strip().lower()
-    while True:
-        if user_option == "1":
-            main()
-        elif user_option == "2":
-            exit_program()
+    next_move()
 
 def exit_program():
     prRed("Exiting the program...")

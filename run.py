@@ -40,7 +40,7 @@ def initial_page():
     while True:
         user_option = input("Enter your answer here:").strip()
         if user_option == "1":
-            prPurple("Ok! Let's check what we have here...\n")
+            prYellow("Ok! Let's check what we have here...\n")
             time.sleep(1.5)
             check_recipe()
         elif user_option == "2":
@@ -127,18 +127,24 @@ def check_recipe():
                         exit_program()       
             else:
                 prRed("No recipes found with that name.")
+                print("Please, choose again.")
+                time.sleep(1.5)
+                check_recipe()
+
         elif user_option == "4":
             os.system('clear')
             main()
+        elif user_option == "exit":
+            exit_program()
         else:
-            prRed('Please, enter 1 or 2 to continue.')
-            prRed("Or you can enter 'exit' to go back to the initial menu.")
+            prRed('Please, enter a valid option to continue.')
+            prRed("Or you can enter 'exit' to end the program.")
             continue
 
 def recipe_suggestion():
     os.system('clear')
 
-    prPurple("Ok! I think you you'll like this one:\n")
+    prPurple("Ok! I think you'll like this one:\n")
     time.sleep(0.8)
     all_recipes = SHEET.worksheet("recipes").get_all_values()         
         
@@ -174,242 +180,242 @@ def recipe_suggestion():
                 prRed('Please, enter a valid option to continue.')
                 continue
 
-def editing():
-    print("""
-        What would you like to edit?\n 
-            1. First name 
-            2. Recipe
-            3. Ingredients
-            4. Preparation
-            5. Recipe favorite\n""")
-    edit_recipe = input("Enter your option here:")
-    prRed("\nYou can enter EXIT to go back to main menu")
-    if edit_recipe == "1":
-        print(f'First name: {user_details}')
-        global name_update
-        name_update = input("New name:")
-        print(f"""
-                Name: {name_update}
-                Recipe name: {recipe_name}
-                Ingredients List: {ingredients_list}
-                Recipe Preparation: {recipe_preparation}
-                Recipe Favorite: {recipe_favorite}
-                """)
+# def editing():
+    # print("""
+    #     What would you like to edit?\n 
+    #         1. First name 
+    #         2. Recipe
+    #         3. Ingredients
+    #         4. Preparation
+    #         5. Recipe favorite\n""")
+    # edit_recipe = input("Enter your option here:")
+    # prRed("\nYou can enter EXIT to go back to main menu")
+    # if edit_recipe == "1":
+    #     print(f'First name: {user_details}')
+    #     global name_update
+    #     name_update = input("New name:")
+    #     print(f"""
+    #             Name: {name_update}
+    #             Recipe name: {recipe_name}
+    #             Ingredients List: {ingredients_list}
+    #             Recipe Preparation: {recipe_preparation}
+    #             Recipe Favorite: {recipe_favorite}
+    #             """)
 
-        prRed("\nPlease, make sure you added all information right.")
-        print("1. Confirm")
-        print("2. Edit")
-        print("3. Cancel and go to main page")
+    #     prRed("\nPlease, make sure you added all information right.")
+    #     print("1. Confirm")
+    #     print("2. Edit")
+    #     print("3. Cancel and go to main page")
 
-        while True:
-            user_option = input("Enter your answer here:").strip().lower()
+    #     while True:
+    #         user_option = input("Enter your answer here:").strip().lower()
                     
-            if user_option == "1":
-                prPurple("Ok! Thank you so much for your contribution!\n)
-                prYellow("Updating...")
-                time.sleep(1.0)
-                data_list = (name_update, recipe_name, ingredients_list, recipe_preparation, recipe_favorite)
-                recipes.append_row(data_list)
-                prGreen("Update completed.")
+    #         if user_option == "1":
+    #             prPurple("Ok! Thank you so much for your contribution!\n")
+    #             prYellow("Updating...")
+    #             time.sleep(1.0)
+    #             data_list = (name_update, recipe_name, ingredients_list, recipe_preparation, recipe_favorite)
+    #             recipes.append_row(data_list)
+    #             prGreen("Update completed.")
 
-                print("What to do next?")
-                print("1. Main menu")
-                print("2. Exit program")
-                user_option = input("Enter here your option:").strip().lower()
-                while True:
-                    if user_option == "1":
-                        main()
-                    elif user_option == "2":
-                        exit_program()
-            elif user_option == "2":
-                editing()
-            elif user_option == "3":
-                main()
-            elif user_option == "exit":
-                exit_program()
-            else:
-                prRed('Please, enter a valid option to continue.')
-                prRed("Or you can enter 'exit' to end the program")
-    elif edit_recipe == "2":
-        print(f'Recipe: {recipe_name}')
-        global recipe_update
-        recipe_update = input("New recipe name:")
-        print(f"""
-                Name: {name_update}
-                Recipe name: {recipe_update}
-                Ingredients List: {ingredients_list}
-                Recipe Preparation: {recipe_preparation}
-                Recipe Favorite: {recipe_favorite}
-                """)
+    #             print("What to do next?")
+    #             print("1. Main menu")
+    #             print("2. Exit program")
+    #             user_option = input("Enter here your option:").strip().lower()
+    #             while True:
+    #                 if user_option == "1":
+    #                     main()
+    #                 elif user_option == "2":
+    #                     exit_program()
+    #         elif user_option == "2":
+    #             editing()
+    #         elif user_option == "3":
+    #             main()
+    #         elif user_option == "exit":
+    #             exit_program()
+    #         else:
+    #             prRed('Please, enter a valid option to continue.')
+    #             prRed("Or you can enter 'exit' to end the program")
+    # elif edit_recipe == "2":
+    #     print(f'Recipe: {recipe_name}')
+    #     global recipe_update
+    #     recipe_update = input("New recipe name:")
+    #     print(f"""
+    #             Name: {name_update}
+    #             Recipe name: {recipe_update}
+    #             Ingredients List: {ingredients_list}
+    #             Recipe Preparation: {recipe_preparation}
+    #             Recipe Favorite: {recipe_favorite}
+    #             """)
 
-        print("\nPlease, make sure you added all information right.")
-        print("1. Confirm")
-        print("2. Edit")
-        print("3. Cancel and go to main page")
+    #     print("\nPlease, make sure you added all information right.")
+    #     print("1. Confirm")
+    #     print("2. Edit")
+    #     print("3. Cancel and go to main page")
 
-        while True:
-            user_option = input("Enter your answer here:").strip().lower()
+    #     while True:
+    #         user_option = input("Enter your answer here:").strip().lower()
                     
-            if user_option == "1":
-                print("Ok! Thank you so much for your contribution!\n)
-                prYellow("Updating...")
-                time.sleep(1.0)
-                data_list = (name_update, recipe_update, ingredients_list, recipe_preparation, recipe_favorite)
-                recipes.append_row(data_list)
-                prGreen("Update completed.")
+    #         if user_option == "1":
+    #             print("Ok! Thank you so much for your contribution!\n")
+    #             prYellow("Updating...")
+    #             time.sleep(1.0)
+    #             data_list = (name_update, recipe_update, ingredients_list, recipe_preparation, recipe_favorite)
+    #             recipes.append_row(data_list)
+    #             prGreen("Update completed.")
 
-                print("What to do next?")
-                print("1. Main menu")
-                print("2. Exit program")
-                user_option = input("Enter here your option:").strip().lower()
-                while True:
-                    if user_option == "1":
-                        main()
-                    elif user_option == "2":
-                        exit_program()
-            elif user_option == "2":
-                editing()
-            elif user_option == "3":
-                main()
-            elif user_option == "exit":
-                exit_program()
-            else:
-                prRed('Please, enter a valid option to continue.')
-                prRed("Or you can enter 'exit' to end the program")
-    elif edit_recipe == "3":
-        print(f'Ingredients List: {ingredients_list}')
-        global ingredients_update
-        ingredients_update = input("New ingredients list:")
-        print(f"""
-                Name: {name_update}
-                Recipe name: {recipe_update}
-                Ingredients List: {ingredients_update}
-                Recipe Preparation: {recipe_preparation}
-                Recipe Favorite: {recipe_favorite}
-                """)
+    #             print("What to do next?")
+    #             print("1. Main menu")
+    #             print("2. Exit program")
+    #             user_option = input("Enter here your option:").strip().lower()
+    #             while True:
+    #                 if user_option == "1":
+    #                     main()
+    #                 elif user_option == "2":
+    #                     exit_program()
+    #         elif user_option == "2":
+    #             editing()
+    #         elif user_option == "3":
+    #             main()
+    #         elif user_option == "exit":
+    #             exit_program()
+    #         else:
+    #             prRed('Please, enter a valid option to continue.')
+    #             prRed("Or you can enter 'exit' to end the program")
+    # elif edit_recipe == "3":
+    #     print(f'Ingredients List: {ingredients_list}')
+    #     global ingredients_update
+    #     ingredients_update = input("New ingredients list:")
+    #     print(f"""
+    #             Name: {name_update}
+    #             Recipe name: {recipe_update}
+    #             Ingredients List: {ingredients_update}
+    #             Recipe Preparation: {recipe_preparation}
+    #             Recipe Favorite: {recipe_favorite}
+    #             """)
 
-        print("\nPlease, make sure you added all information right.")
-        print("1. Confirm")
-        print("2. Edit")
-        print("3. Cancel and go to main page")
+    #     print("\nPlease, make sure you added all information right.")
+    #     print("1. Confirm")
+    #     print("2. Edit")
+    #     print("3. Cancel and go to main page")
 
-        while True:
-            user_option = input("Enter your answer here:").strip().lower()
+    #     while True:
+    #         user_option = input("Enter your answer here:").strip().lower()
                     
-            if user_option == "1":
-                print("Ok! Thank you so much for your contribution!\n)
-                prYellow("Updating...")
-                time.sleep(1.0)
-                data_list = (name_update, recipe_update, ingredients_update, recipe_preparation, recipe_favorite)
-                recipes.append_row(data_list)
-                prGreen("Update completed.")
-                print("What to do next?")
-                print("1. Main menu")
-                print("2. Exit program")
-                user_option = input("Enter here your option:").strip().lower()
-                while True:
-                    if user_option == "1":
-                        main()
-                    elif user_option == "2":
-                        exit_program()
-            elif user_option == "2":
-                editing()
-            elif user_option == "3":
-                main()
-            elif user_option == "exit":
-                exit_program()
-            else:
-                prRed('Please, enter a valid option to continue.')
-                prRed("Or you can enter 'exit' to end the program")
-    elif edit_recipe == "4":
-        print(f'Recipe preparation: {recipe_preparation}')
-        global preparation_update
-        preparation_update = input("New recipe preparation:")
-        print(f"""
-                Name: {name_update}
-                Recipe name: {recipe_update}
-                Ingredients List: {ingredients_update}
-                Recipe Preparation: {preparation_update}
-                Recipe Favorite: {recipe_favorite}
-                """)
+    #         if user_option == "1":
+    #             print("Ok! Thank you so much for your contribution!\n")
+    #             prYellow("Updating...")
+    #             time.sleep(1.0)
+    #             data_list = (name_update, recipe_update, ingredients_update, recipe_preparation, recipe_favorite)
+    #             recipes.append_row(data_list)
+    #             prGreen("Update completed.")
+    #             print("What to do next?")
+    #             print("1. Main menu")
+    #             print("2. Exit program")
+    #             user_option = input("Enter here your option:").strip().lower()
+    #             while True:
+    #                 if user_option == "1":
+    #                     main()
+    #                 elif user_option == "2":
+    #                     exit_program()
+    #         elif user_option == "2":
+    #             editing()
+    #         elif user_option == "3":
+    #             main()
+    #         elif user_option == "exit":
+    #             exit_program()
+    #         else:
+    #             prRed('Please, enter a valid option to continue.')
+    #             prRed("Or you can enter 'exit' to end the program")
+    # elif edit_recipe == "4":
+    #     print(f'Recipe preparation: {recipe_preparation}')
+    #     global preparation_update
+    #     preparation_update = input("New recipe preparation:")
+    #     print(f"""
+    #             Name: {name_update}
+    #             Recipe name: {recipe_update}
+    #             Ingredients List: {ingredients_update}
+    #             Recipe Preparation: {preparation_update}
+    #             Recipe Favorite: {recipe_favorite}
+    #             """)
 
-        print("\nPlease, make sure you added all information right.")
-        print("1. Confirm")
-        print("2. Edit")
-        print("3. Cancel and go to main page")
+    #     print("\nPlease, make sure you added all information right.")
+    #     print("1. Confirm")
+    #     print("2. Edit")
+    #     print("3. Cancel and go to main page")
 
-        while True:
-            user_option = input("Enter your answer here:").strip().lower()
+    #     while True:
+    #         user_option = input("Enter your answer here:").strip().lower()
                     
-            if user_option == "1":
-                print("Ok! Thank you so much for your contribution!\n)
-                prYellow("Updating...")
-                time.sleep(1.0)
-                data_list = (name_update, recipe_update, ingredients_update, preparation_update, recipe_favorite)
-                recipes.append_row(data_list)
-                prGreen("Update completed.")
-                print("What to do next?")
-                print("1. Main menu")
-                print("2. Exit program")
-                user_option = input("Enter here your option:").strip().lower()
-                while True:
-                    if user_option == "1":
-                        main()
-                    elif user_option == "2":
-                        exit_program()
-            elif user_option == "2":
-                editing()
-            elif user_option == "3":
-                main()
-            elif user_option == "exit":
-                exit_program()
-            else:
-                prRed('Please, enter a valid option to continue.')
-                prRed("Or you can enter 'exit' to end the program")
-    elif edit_recipe == "5":
-        print(f'Favorite by: {recipe_favorite}')
-        global favorite_update
-        favorite_update = input("Now favorite by:")
-        print(f"""
-                Name: {name_update}
-                Recipe name: {recipe_update}
-                Ingredients List: {ingredients_update}
-                Recipe Preparation: {preparation_update}
-                Recipe Favorite: {favorite_update}
-                """)
+    #         if user_option == "1":
+    #             print("Ok! Thank you so much for your contribution!\n")
+    #             prYellow("Updating...")
+    #             time.sleep(1.0)
+    #             data_list = (name_update, recipe_update, ingredients_update, preparation_update, recipe_favorite)
+    #             recipes.append_row(data_list)
+    #             prGreen("Update completed.")
+    #             print("What to do next?")
+    #             print("1. Main menu")
+    #             print("2. Exit program")
+    #             user_option = input("Enter here your option:").strip().lower()
+    #             while True:
+    #                 if user_option == "1":
+    #                     main()
+    #                 elif user_option == "2":
+    #                     exit_program()
+    #         elif user_option == "2":
+    #             editing()
+    #         elif user_option == "3":
+    #             main()
+    #         elif user_option == "exit":
+    #             exit_program()
+    #         else:
+    #             prRed('Please, enter a valid option to continue.')
+    #             prRed("Or you can enter 'exit' to end the program")
+    # elif edit_recipe == "5":
+        # print(f'Favorite by: {recipe_favorite}')
+        # global favorite_update
+        # favorite_update = input("Now favorite by:")
+        # print(f"""
+        #         Name: {name_update}
+        #         Recipe name: {recipe_update}
+        #         Ingredients List: {ingredients_update}
+        #         Recipe Preparation: {preparation_update}
+        #         Recipe Favorite: {favorite_update}
+        #         """)
 
-        print("\nPlease, make sure you added all information right.")
-        print("1. Confirm")
-        print("2. Edit")
-        print("3. Cancel and go to main page")
+        # print("\nPlease, make sure you added all information right.")
+        # print("1. Confirm")
+        # print("2. Edit")
+        # print("3. Cancel and go to main page")
 
-        while True:
-            user_option = input("Enter your answer here:").strip().lower()
+        # while True:
+        #     user_option = input("Enter your answer here:").strip().lower()
                     
-            if user_option == "confirm":
-                print("Ok! Thank you so much for your contribution!\n)
-                prYellow("Updating...")
-                time.sleep(1.0)
-                data_list = (name_update, recipe_update, ingredients_update, preparation_update, favorite_update)
-                recipes.append_row(data_list)
-                print("What to do next?")
-                print("1. Main menu")
-                print("2. Exit program")
-                user_option = input("Enter here your option:").strip().lower()
-                while True:
-                    if user_option == "1":
-                        main()
-                    elif user_option == "2":
-                        exit_program()
-            elif user_option == "2":
-                editing()
-            elif user_option == "3":
-                main()
-            elif user_option == "exit":
-                exit_program()
-            else:
-                prRed('Please, enter a valid option to continue.')
-                prRed("Or you can enter 'exit' to end the program")
+        #     if user_option == "confirm":
+        #         print("Ok! Thank you so much for your contribution!\n")
+        #         prYellow("Updating...")
+        #         time.sleep(1.0)
+        #         data_list = (name_update, recipe_update, ingredients_update, preparation_update, favorite_update)
+        #         recipes.append_row(data_list)
+        #         print("What to do next?")
+        #         print("1. Main menu")
+        #         print("2. Exit program")
+        #         user_option = input("Enter here your option:").strip().lower()
+        #         while True:
+        #             if user_option == "1":
+        #                 main()
+        #             elif user_option == "2":
+        #                 exit_program()
+        #     elif user_option == "2":
+        #         editing()
+        #     elif user_option == "3":
+        #         main()
+        #     elif user_option == "exit":
+        #         exit_program()
+        #     else:
+        #         prRed('Please, enter a valid option to continue.')
+        #         prRed("Or you can enter 'exit' to end the program")
 
 def add_recipe():   
     os.system('clear')
@@ -444,23 +450,9 @@ def add_recipe():
     while True:
         user_option = input("Enter your answer here:").strip().lower()
         if user_option == "1": 
-            data_list = (user_details, recipe_name, ingredients_list, recipe_preparation, recipe_favorite)
-            recipes.append_row(data_list)
-            prYellow("Loading your information...")
-            time.sleep(1.0)
-            prGreen("Recipe added.")
-
-            print("What to do next?")
-            print("1. Main page")
-            print("2. Exit program")
-            user_option = input("Enter here your option:").strip().lower()
-            while True:
-                if user_option == "1":
-                    main()
-                elif user_option == "2":
-                    exit_program()        
+            confirm_recipe()        
         elif user_option == "2":
-            editing()
+            edit_recipe()
         elif user_option == "3":
             os.system('clear')
             main()
@@ -469,6 +461,75 @@ def add_recipe():
         else:
             prRed('Please, enter a valid option to continue.')
             prRed("Or you can enter EXIT to go back to the initial menu.")
+
+def edit_recipe():
+    global user_details, recipe_name, ingredients_list, recipe_preparation, recipe_favorite
+
+    os.system('clear')
+    prRed("Which information would you like to edit?\n")
+    print("1. First name")
+    print("2. Recipe name")
+    print("3. Ingredients list")
+    print("4. Recipe preparation")
+    print("5. Recipe favorite")
+    print("6. Cancel and go to the main page")
+
+    edit_option = input("Enter your option here:")
+    if edit_option == "1":
+        user_details = input(f'First name ({user_details}):') or user_details
+    elif edit_option == "2":
+        recipe_name = input(f'Recipe name ({recipe_name}):') or recipe_name
+    elif edit_option == "3":
+        ingredients_list = input(f'Ingredients list ({ingredients_list}):') or ingredients_list
+    elif edit_option == "4":
+        recipe_preparation = input(f'Recipe preparation ({recipe_preparation}):') or recipe_preparation
+    elif edit_option == "5":
+        recipe_favorite = input(f'Recipe favorite ({recipe_favorite}):') or recipe_favorite
+    elif edit_option == "6":
+        main()
+    else:
+        prRed('Please, enter a valid option to continue.')
+        # continue
+
+    # Mostra as informações atualizadas
+    print(f"""
+        Your name: {user_details}
+        Recipe name: {recipe_name}
+        Ingredients List: {ingredients_list}
+        Recipe Preparation: {recipe_preparation}
+        Recipe Favorite: {recipe_favorite}
+        """)
+    # continue 
+        
+    prRed("\nPlease, make sure you added all information right.")
+    print("1. Confirm")
+    print("2. Edit")
+    print("3. Cancel and go to main page")
+
+    while True:
+        user_option = input("Enter your answer here:").strip().lower()
+                        
+        if user_option == "1": #volta para 1
+            confirm_recipe()
+        elif user_option == "2": 
+            edit_recipe()
+
+def confirm_recipe():
+    data_list = (user_details, recipe_name, ingredients_list, recipe_preparation, recipe_favorite)
+    recipes.append_row(data_list)
+    prYellow("Loading your information...")
+    time.sleep(1.0)
+    prGreen("Recipe added.")
+
+    print("What to do next?")
+    print("1. Main page")
+    print("2. Exit program")
+    user_option = input("Enter here your option:").strip().lower()
+    while True:
+        if user_option == "1":
+            main()
+        elif user_option == "2":
+            exit_program()
 
 def exit_program():
     prRed("Exiting the program...")
@@ -499,7 +560,7 @@ def main():
     is a heartfelt family recipe book where
     we can share our favorite recipes!
     This is a gift to our future generation who will
-    be able to prepare the most special recipes.\n,
+    be able to prepare the most special recipes.\n
         """)
     input("Press Enter to continue...")
     initial_page()

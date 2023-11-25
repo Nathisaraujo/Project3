@@ -20,23 +20,29 @@ recipes = SHEET.worksheet('recipes')
 
 
 def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
+
+
 def prYellow(skk): print("\033[93m {}\033[00m" .format(skk))
+
+
 def prPurple(skk): print("\033[95m {}\033[00m" .format(skk))
+
+
 def prCyan(skk): print("\033[96m {}\033[00m" .format(skk))
+
+
 def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
 
+
 def initial_page():
+
     """
-
     Ask what the user wants to do
-
     """
     clear_console()
-
     print("\nWhat would you like to do? \n")
     print("1. Check a recipe")
     print("2. Add a new one\n")
-    
     while True:
         user_option = input("Enter your answer here:").strip()
         if user_option == "1":
@@ -51,10 +57,11 @@ def initial_page():
             prRed('Please, enter 1 or 2 to continue.')
             continue
 
+
 def check_recipe():
     clear_console()
 
-    print("How would you like to finde a recipe?\n")
+    print("How would you like to find a recipe?\n")
     print("1. View all recipes")
     print("2. Suggestion Recipe")
     print("3. Specific Recipe")
@@ -78,8 +85,17 @@ def check_recipe():
             prRed("Or you can enter 'exit' to end the program.")
             continue
 
+
 def all_recipes():
-    headers = ["Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
+    clear_console()
+    headers = [
+        "Name",
+        "Ingredients",
+        "How to make it",
+        "Creator's Name",
+        "Who's Favorite"
+    ]
+    headers = [header.strip() for header in headers]
 
     all_recipes = SHEET.worksheet("recipes").get_all_values()
 
@@ -91,37 +107,38 @@ def all_recipes():
     for row in all_recipes:
         tables.add_row(row)
     print(tables)
+    next_move()
 
-    print("What to do next?")
-    print("1. Main page")
-    print("2. Exit program")
-    user_option = input("Enter here your option:").strip().lower()
-    while True:
-        if user_option == "1":
-            main()
-        elif user_option == "2":
-            exit_program()
 
-def search_recipe_by_name(recipe_name):    
+def search_recipe_by_name(recipe_name):
     recipes = []
     all_rows = SHEET.worksheet("recipes").get_all_values()
     for row in all_rows:
-        if recipe_name.lower() in row[0].lower(): 
+        if recipe_name.lower() in row[0].lower():
             recipes.append(row)
     return recipes
 
+
 def recipe_by_name():
-    prPurple("Ok! Enter the recipe name here and we're going to see if we have it!\n")
+    clear_console()
+    prPurple("""Ok! Enter the recipe name here
+    and we're going to see if we have it!\n""")
     recipe_name = input("Check Recipe:")
     found_recipes = search_recipe_by_name(recipe_name)
 
-    headers = ["Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
+    headers = [
+        "Name",
+        "Ingredients",
+        "How to make it",
+        "Creator's Name",
+        "Who's Favorite"
+    ]
+    headers = [header.strip() for header in headers]
 
     if found_recipes:
         print(f"Found {len(found_recipes)} matching recipes:")
         recipe_row = found_recipes[0]
         prCyan("\nRecipe Details:")
-
         tables = PrettyTable()
         tables.field_names = headers
         tables.max_width = 30
@@ -138,18 +155,24 @@ def recipe_by_name():
         time.sleep(1.5)
         check_recipe()
 
+
 def recipe_suggestion():
     clear_console()
 
     prPurple("Ok! I think you'll like this one:\n")
     time.sleep(0.8)
-    all_recipes = SHEET.worksheet("recipes").get_all_values()         
-        
+    all_recipes = SHEET.worksheet("recipes").get_all_values()
     if len(all_recipes) > 1:
-        headers = ["Name", "Ingredients", "How to make it", "Creator's Name", "Who's Favorite"]
+        headers = [
+            "Name",
+            "Ingredients",
+            "How to make it",
+            "Creator's Name",
+            "Who's Favorite"
+        ]
+        headers = [header.strip() for header in headers]
         random_index = randint(1, len(all_recipes)-1)  
-        random_recipe = all_recipes[random_index - 1]
-                
+        random_recipe = all_recipes[random_index - 1]              
         tables = PrettyTable()
         tables.field_names = headers
         tables.max_width = 30
@@ -177,14 +200,18 @@ def recipe_suggestion():
                 prRed('Please, enter a valid option to continue.')
                 continue
 
+
 def add_recipe():   
     clear_console()
 
     prPurple("Ok! Then we'll need you to give us some information...")
     time.sleep(1.0)
 
-    global user_details, recipe_name, ingredients_list, recipe_preparation, recipe_favorite
-    
+    global user_details
+    global recipe_name
+    global ingredients_list
+    global recipe_preparation
+    global recipe_favorite
     user_details = input("First name:")
     recipe_name = input("Name of the recipe:")
     ingredients_list = input("What are the ingredients?")
@@ -198,7 +225,6 @@ def add_recipe():
         Recipe Preparation: {recipe_preparation}
         Recipe Favorite: {recipe_favorite}
         """)
-     
     print("Please, make sure you added all information right.\n")
     print("1. Confirm")
     print("2. Edit")
@@ -206,7 +232,7 @@ def add_recipe():
 
     while True:
         user_option = input("Enter your answer here:").strip().lower()
-        if user_option == "1": 
+        if user_option == "1":
             confirm_recipe()        
         elif user_option == "2":
             edit_recipe()
@@ -219,10 +245,16 @@ def add_recipe():
             prRed('Please, enter a valid option to continue.')
             prRed("Or you can enter EXIT to go back to the initial menu.")
 
-def edit_recipe():
-    global user_details, recipe_name, ingredients_list, recipe_preparation, recipe_favorite
 
+def edit_recipe():
     clear_console()
+
+    global user_details
+    global recipe_name
+    global ingredients_list
+    global recipe_preparation
+    global recipe_favorite
+
     prRed("Which information would you like to edit?\n")
     print("1. First name")
     print("2. Recipe name")
@@ -237,11 +269,14 @@ def edit_recipe():
     elif edit_option == "2":
         recipe_name = input(f'Recipe name ({recipe_name}):') or recipe_name
     elif edit_option == "3":
-        ingredients_list = input(f'Ingredients list ({ingredients_list}):') or ingredients_list
+        ingredients_list = input(f'Ingredients list ({ingredients_list}):')\
+                            or ingredients_list
     elif edit_option == "4":
-        recipe_preparation = input(f'Recipe preparation ({recipe_preparation}):') or recipe_preparation
+        recipe_preparation = input(f'Recipe preparation ({recipe_preparation}):')\
+                            or recipe_preparation
     elif edit_option == "5":
-        recipe_favorite = input(f'Recipe favorite ({recipe_favorite}):') or recipe_favorite
+        recipe_favorite = input(f'Recipe favorite ({recipe_favorite}):')\
+                            or recipe_favorite
     elif edit_option == "6":
         main()
     else:
@@ -253,8 +288,7 @@ def edit_recipe():
         Ingredients List: {ingredients_list}
         Recipe Preparation: {recipe_preparation}
         Recipe Favorite: {recipe_favorite}
-        """)
-        
+        """)      
     prRed("\nPlease, make sure you added all information right.")
     print("1. Confirm")
     print("2. Edit")
@@ -262,14 +296,21 @@ def edit_recipe():
 
     while True:
         user_option = input("Enter your answer here:").strip().lower()
-                        
-        if user_option == "1": #volta para 1
+        if user_option == "1":
             confirm_recipe()
-        elif user_option == "2": 
+        elif user_option == "2":
             edit_recipe()
 
+
 def confirm_recipe():
-    data_list = (user_details, recipe_name, ingredients_list, recipe_preparation, recipe_favorite)
+    clear_console()
+    data_list = (
+        user_details,
+        recipe_name,
+        ingredients_list,
+        recipe_preparation,
+        recipe_favorite
+    )
     recipes.append_row(data_list)
     prYellow("Loading your information...")
     time.sleep(1.0)
@@ -277,8 +318,9 @@ def confirm_recipe():
 
     next_move()
 
+
 def next_move():
-    print("What to do next?")
+    print("\nWhat to do next?")
     print("1. Main page")
     print("2. Exit program")
     user_option = input("Enter here your option:").strip().lower()
@@ -288,20 +330,23 @@ def next_move():
         elif user_option == "2":
             exit_program()
 
+
 def clear_console():
     os.system('clear' if os.name == 'posix' else 'cls')
 
+
 def exit_program():
+    clear_console()
     prRed("Exiting the program...")
     time.sleep(1.0)
     sys.exit(0)
 
+
 def main():
+    clear_console()
     """
     run all program functions
-
     """
-    print("             FAMILY FAVORITES             ")
     print("\n")
     print("  _____               _ _                  ")
     print(" |  ___|_ _ _ __ ___ (_) |_   _            ")
@@ -314,15 +359,15 @@ def main():
     print(" | |_ / _` \ \ / / _ \| '__| | __/ _ \/ __|")
     print(" |  _| (_| |\ V / (_) | |  | | ||  __/\__ \\")
     print(" |_|  \__,_| \_/ \___/|_|  |_|\__\___||___/")
-
     prYellow("""\n
-              FAMILY FAVORITES 
-    is a heartfelt family recipe book where
-    we can share our favorite recipes!
+                Welcom to
+              Family Favorites
+    This is a heartfelt family recipe book where
+        we can share our favorite recipes!
     This is a gift to our future generation who will
-    be able to prepare the most special recipes.\n
-        """)
+    be able to prepare the most special recipes.\n""")
     input("Press Enter to continue...")
     initial_page()
-                                           
+
+
 main()

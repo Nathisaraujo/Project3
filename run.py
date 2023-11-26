@@ -388,6 +388,10 @@ def next_move():
             main()
         elif user_option == "2":
             exit_program()
+        else:
+            prRed('Please, enter 1 or 2 to continue.')
+            next_move()
+            
 
 
 def clear_console():

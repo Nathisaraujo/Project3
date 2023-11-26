@@ -70,12 +70,12 @@ def check_recipe():
 
     print("How would you like to find a recipe?\n")
     print("1. View all recipes")
-    print("2. Suggestion Recipe")
+    print("2. Give me a suggestion")
     print("3. Specific Recipe")
     print("4. Go back to main page.")
 
     while True:
-        user_option = input("Enter your answer here:").strip().lower()
+        user_option = input("\nEnter your answer here:").strip().lower()
         if user_option == "1":
             all_recipes()
         elif user_option == "2":
@@ -215,10 +215,10 @@ def recipe_suggestion():
         tables.add_row(random_recipe)
         print(tables)
 
-        print("What to do next?")
+        print("\nWhat to do next?")
         print("1. Another recommendation.")
         print("2. Go back to main menu.")
-        print("3. Exit the program.")
+        print("3. Exit the program.\n")
 
         while True:
             user_option = input("Enter your answer here:").strip().lower()
@@ -246,7 +246,7 @@ def add_recipe():
     """   
     clear_console()
 
-    prPurple("Ok! Then we'll need you to give us some information...")
+    prPurple("Ok! Then we'll need you to give us some information...\n")
     time.sleep(1.0)
 
     global user_details
@@ -270,7 +270,7 @@ def add_recipe():
     print("Please, make sure you added all information right.\n")
     print("1. Confirm")
     print("2. Edit")
-    print("3. Cancel and go to main page")
+    print("3. Cancel and go to main page\n")
 
     while True:
         user_option = input("Enter your answer here:").strip().lower()
@@ -303,15 +303,15 @@ def edit_recipe():
     global recipe_preparation
     global recipe_favorite
 
-    prRed("Which information would you like to edit?\n")
+    print("Which information would you like to edit?\n")
     print("1. First name")
     print("2. Recipe name")
     print("3. Ingredients list")
     print("4. Recipe preparation")
     print("5. Recipe favorite")
-    print("6. Cancel and go to the main page")
+    print("6. Cancel and go to the main page\n")
 
-    edit_option = input("Enter your option here:")
+    edit_option = input("Enter your option here:\n")
     if edit_option == "1":
         user_details = input(f'First name ({user_details}):') or user_details
     elif edit_option == "2":
@@ -338,9 +338,9 @@ def edit_recipe():
         Recipe Favorite: {recipe_favorite}
         """)      
     prRed("\nPlease, make sure you added all information right.")
-    print("1. Confirm")
+    print("1. \nConfirm")
     print("2. Edit")
-    print("3. Cancel and go to main page")
+    print("3. Cancel and go to main page\n")
 
     while True:
         user_option = input("Enter your answer here:").strip().lower()
@@ -381,7 +381,7 @@ def next_move():
     """
     print("\nWhat to do next?")
     print("1. Main page")
-    print("2. Exit program")
+    print("2. Exit program\n")
     user_option = input("Enter here your option:").strip().lower()
     while True:
         if user_option == "1":
@@ -390,8 +390,7 @@ def next_move():
             exit_program()
         else:
             prRed('Please, enter 1 or 2 to continue.')
-            next_move()
-            
+            next_move()           
 
 
 def clear_console():
@@ -432,12 +431,12 @@ def main():
         |_|  \__,_| \_/ \___/|_|  |_|\__\___||___/
         """)
     prYellow("""\n
-                Welcom to
-              Family Favorites
-    This is a heartfelt family recipe book where
-        we can share our favorite recipes!
+                     Welcom to
+                 Family Favorites
+     This is a heartfelt family recipe book where
+          we can share our favorite recipes!
     This is a gift to our future generation who will
-    be able to prepare the most special recipes.\n""")
+       be able to prepare the most special recipes.\n""")
     input("Press Enter to continue...")
     initial_page()
 

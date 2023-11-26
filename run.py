@@ -43,7 +43,8 @@ def initial_page():
     clear_console()
     print("\nWhat would you like to do? \n")
     print("1. Check a recipe")
-    print("2. Add a new one\n")
+    print("2. Add a new one")
+    print("3. Exit the program\n")
     while True:
         user_option = input("Enter your answer here:").strip()
         if user_option == "1":
@@ -54,6 +55,9 @@ def initial_page():
             prPurple("HMMMM! New recipe coming!\n")
             time.sleep(1.5)
             add_recipe()
+        elif user_option == "3":
+            prPurple("Ok... bye bye!\n")
+            exit_program()
         else:
             prRed('Please, enter 1 or 2 to continue.')
             continue

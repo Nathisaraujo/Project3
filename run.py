@@ -1,10 +1,11 @@
-import os
+#import gspread to update worksheet
 import gspread
 from google.oauth2.service_account import Credentials
-from random import randint
-from prettytable import PrettyTable
-import time
-import sys
+import os  #import to clear screen
+from random import randint #import to choose random data in the worksheet
+from prettytable import PrettyTable  #import table style
+import time  #import to time.sleep
+import sys  #import to exit program
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -18,7 +19,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('family_favorites')
 recipes = SHEET.worksheet('recipes')
 
-
+#functions to call colors 
 def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
 
 
@@ -35,9 +36,9 @@ def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
 
 
 def initial_page():
-
     """
-    Ask what the user wants to do
+    Initial page
+    Ask what the user would like to do - check or add a recipe.
     """
     clear_console()
     print("\nWhat would you like to do? \n")
@@ -59,6 +60,12 @@ def initial_page():
 
 
 def check_recipe():
+    """
+    - Option so the user can check the recipe. 
+    - It takes the user to the option they choose, respectively.
+    - The user can also choose to exit the program or go back to
+    the main page. 
+    """
     clear_console()
 
     print("How would you like to find a recipe?\n")
@@ -87,6 +94,12 @@ def check_recipe():
 
 
 def all_recipes():
+    """
+    - Return all recipes from the worksheet to
+    the user.
+    - It gets the headers and align with all
+    rows.
+    """
     clear_console()
     headers = [
         "Name",
@@ -111,6 +124,12 @@ def all_recipes():
 
 
 def search_recipe_by_name(recipe_name):
+    """
+    When the user choose to look for a recipe
+    by the name:
+    - Searches the first column of the panel 
+    to see if the name the user entered exists.
+    """
     recipes = []
     all_rows = SHEET.worksheet("recipes").get_all_values()
     for row in all_rows:
@@ -120,6 +139,14 @@ def search_recipe_by_name(recipe_name):
 
 
 def recipe_by_name():
+    """
+    - This is the option to look for a recipe by name.
+    - The user writes what he wants and the program 
+    sees if the recipe exists in the spreadsheet.
+    - If a recipe is found, return the respective row.
+    - If no recipe is found, it gives him the option
+    to choose again.
+    """
     clear_console()
     prPurple("""Ok! Enter the recipe name here
     and we're going to see if we have it!\n""")
@@ -137,7 +164,6 @@ def recipe_by_name():
 
     if found_recipes:
         print(f"Found {len(found_recipes)} matching recipes:")
-        recipe_row = found_recipes[0]
         prCyan("\nRecipe Details:")
         tables = PrettyTable()
         tables.field_names = headers
@@ -157,6 +183,14 @@ def recipe_by_name():
 
 
 def recipe_suggestion():
+    """
+    - In this option, the user chooses to 
+    receive a random recipe suggestion.
+    - It returns a single row with a random
+    suggestion from the spreadsheet recipe book.
+    - If the user is not happy with the recipe
+    given, he can opt to get other random recipe.
+    """
     clear_console()
 
     prPurple("Ok! I think you'll like this one:\n")
@@ -201,7 +235,15 @@ def recipe_suggestion():
                 continue
 
 
-def add_recipe():   
+def add_recipe():
+    """
+    - This option allows the user to add a 
+    new recipe.
+    - The user will be asked to fill some information
+    that is uploaded to the spreadsheet in a new row.
+    - If it has some type mistakes, the user can choose 
+    to edit it.
+    """   
     clear_console()
 
     prPurple("Ok! Then we'll need you to give us some information...")
@@ -247,6 +289,12 @@ def add_recipe():
 
 
 def edit_recipe():
+    """
+    - This is the option to edit the information
+    given by the user when adding a new recipe.
+    - The user can edit all options and the new info
+    will be updated when the user enter 'confirm'
+    """
     clear_console()
 
     global user_details
@@ -303,6 +351,11 @@ def edit_recipe():
 
 
 def confirm_recipe():
+    """
+    Here the new recipe added is uploaded
+    to the spreadsheet when the user enter
+    'confirm' in the console.
+    """
     clear_console()
     data_list = (
         user_details,
@@ -320,6 +373,12 @@ def confirm_recipe():
 
 
 def next_move():
+    """
+    This option appears after an option is
+    chosen by the user so he can choose to go back 
+    to the main page (to do something else) or
+    exit the program if he's finished.
+    """
     print("\nWhat to do next?")
     print("1. Main page")
     print("2. Exit program")
@@ -332,10 +391,16 @@ def next_move():
 
 
 def clear_console():
+    """
+    It clears the console.
+    """
     os.system('clear' if os.name == 'posix' else 'cls')
 
 
 def exit_program():
+    """
+    It exits the program when requested by the user.
+    """
     clear_console()
     prRed("Exiting the program...")
     time.sleep(1.0)
@@ -343,22 +408,25 @@ def exit_program():
 
 
 def main():
+    """
+    This is the main page. It explains to the
+    user what 'Family Favorites' is about and 
+    start the program.
+    """
     clear_console()
-    """
-    run all program functions
-    """
-    print("\n")
-    print("  _____               _ _                  ")
-    print(" |  ___|_ _ _ __ ___ (_) |_   _            ")
-    print(" | |_ / _` | '_ ` _ \| | | | | |           ")
-    print(" |  _| (_| | | | | | | | | |_| |           ")
-    print(" |_|  \__,_|_| |_| |_|_|_|\__, |           ")
-    print("                          |___/            ")
-    print("  _____                     _ _            ")
-    print(" |  ___|_ ___   _____  _ __(_) |_ ___  ___ ")
-    print(" | |_ / _` \ \ / / _ \| '__| | __/ _ \/ __|")
-    print(" |  _| (_| |\ V / (_) | |  | | ||  __/\__ \\")
-    print(" |_|  \__,_| \_/ \___/|_|  |_|\__\___||___/")
+    print("""
+        _____               _ _                  
+        |  ___|_ _ _ __ ___ (_) |_   _            
+        | |_ / _` | '_ ` _ \| | | | | |           
+        |  _| (_| | | | | | | | | |_| |           
+        |_|  \__,_|_| |_| |_|_|_|\__, |           
+                                |___/            
+        _____                     _ _            
+        |  ___|_ ___   _____  _ __(_) |_ ___  ___ 
+        | |_ / _` \ \ / / _ \| '__| | __/ _ \/ __|
+        |  _| (_| |\ V / (_) | |  | | ||  __/\__ \\
+        |_|  \__,_| \_/ \___/|_|  |_|\__\___||___/
+        """)
     prYellow("""\n
                 Welcom to
               Family Favorites

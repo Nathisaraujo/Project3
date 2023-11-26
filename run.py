@@ -112,7 +112,6 @@ def all_recipes():
         "Creator's Name",
         "Who's Favorite"
     ]
-    headers = [header.strip() for header in headers]
 
     all_recipes = SHEET.worksheet("recipes").get_all_values()
 
@@ -164,7 +163,6 @@ def recipe_by_name():
         "Creator's Name",
         "Who's Favorite"
     ]
-    headers = [header.strip() for header in headers]
 
     if found_recipes:
         print(f"Found {len(found_recipes)} matching recipes:")
@@ -208,7 +206,6 @@ def recipe_suggestion():
             "Creator's Name",
             "Who's Favorite"
         ]
-        headers = [header.strip() for header in headers]
         random_index = randint(1, len(all_recipes)-1)  
         random_recipe = all_recipes[random_index - 1]              
         tables = PrettyTable()

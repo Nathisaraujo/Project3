@@ -46,7 +46,7 @@ def initial_page():
     print("2. Add a new one")
     print("3. Exit the program\n")
     while True:
-        user_option = input("Enter your answer here:").strip()
+        user_option = input("Enter your answer here:\n").strip()
         if user_option == "1":
             prYellow("Ok! Let's check what we have here...\n")
             time.sleep(1.5)
@@ -79,7 +79,7 @@ def check_recipe():
     print("4. Go back to main page.")
 
     while True:
-        user_option = input("\nEnter your answer here:").strip().lower()
+        user_option = input("\nEnter your answer here:\n").strip().lower()
         if user_option == "1":
             all_recipes()
         elif user_option == "2":
@@ -154,7 +154,7 @@ def recipe_by_name():
     clear_console()
     prPurple("""Ok! Enter the recipe name here
     and we're going to see if we have it!\n""")
-    recipe_name = input("Check Recipe:")
+    recipe_name = input("Check Recipe:\n")
     found_recipes = search_recipe_by_name(recipe_name)
 
     headers = [
@@ -225,7 +225,7 @@ def recipe_suggestion():
         print("3. Exit the program.\n")
 
         while True:
-            user_option = input("Enter your answer here:").strip().lower()
+            user_option = input("Enter your answer here:\n").strip().lower()
             if user_option == "1":
                 os.system('clear')
                 recipe_suggestion()
@@ -258,11 +258,11 @@ def add_recipe():
     global ingredients_list
     global recipe_preparation
     global recipe_favorite
-    user_details = input("First name:")
-    recipe_name = input("Name of the recipe:")
-    ingredients_list = input("What are the ingredients?")
-    recipe_preparation = input("How we prepare the recipe?")
-    recipe_favorite = input("This recipe is who's favorite?")
+    user_details = input("First name:\n")
+    recipe_name = input("Name of the recipe:\n")
+    ingredients_list = input("What are the ingredients?\n")
+    recipe_preparation = input("How we prepare the recipe?\n")
+    recipe_favorite = input("This recipe is who's favorite?\n")
 
     print(f"""
         Your name: {user_details}
@@ -277,7 +277,7 @@ def add_recipe():
     print("3. Cancel and go to main page\n")
 
     while True:
-        user_option = input("Enter your answer here:").strip().lower()
+        user_option = input("Enter your answer here:\n").strip().lower()
         if user_option == "1":
             confirm_recipe()        
         elif user_option == "2":
@@ -317,17 +317,17 @@ def edit_recipe():
 
     edit_option = input("Enter your option here:\n")
     if edit_option == "1":
-        user_details = input(f'First name ({user_details}):') or user_details
+        user_details = input(f'First name ({user_details}):\n') or user_details
     elif edit_option == "2":
-        recipe_name = input(f'Recipe name ({recipe_name}):') or recipe_name
+        recipe_name = input(f'Recipe name ({recipe_name}):\n') or recipe_name
     elif edit_option == "3":
-        ingredients_list = input(f'Ingredients list ({ingredients_list}):')\
+        ingredients_list = input(f'Ingredients list ({ingredients_list}):\n')\
                             or ingredients_list
     elif edit_option == "4":
-        recipe_preparation = input(f'Recipe preparation ({recipe_preparation}):')\
+        recipe_preparation = input(f'Recipe preparation ({recipe_preparation}):\n')\
                             or recipe_preparation
     elif edit_option == "5":
-        recipe_favorite = input(f'Recipe favorite ({recipe_favorite}):')\
+        recipe_favorite = input(f'Recipe favorite ({recipe_favorite}):\n')\
                             or recipe_favorite
     elif edit_option == "6":
         main()
@@ -347,7 +347,7 @@ def edit_recipe():
     print("3. Cancel and go to main page\n")
 
     while True:
-        user_option = input("Enter your answer here:").strip().lower()
+        user_option = input("Enter your answer here:\n").strip().lower()
         if user_option == "1":
             confirm_recipe()
         elif user_option == "2":
@@ -386,7 +386,7 @@ def next_move():
     print("\nWhat to do next?")
     print("1. Main page")
     print("2. Exit program\n")
-    user_option = input("Enter here your option:").strip().lower()
+    user_option = input("Enter here your option:\n").strip().lower()
     while True:
         if user_option == "1":
             main()
@@ -441,7 +441,7 @@ def main():
           we can share our favorite recipes!
     This is a gift to our future generation who will
        be able to prepare the most special recipes.\n""")
-    input("Press Enter to continue...")
+    input("Press Enter to continue...\n")
     initial_page()
 
 

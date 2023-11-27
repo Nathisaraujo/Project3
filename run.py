@@ -117,7 +117,7 @@ def all_recipes():
 
     tables = PrettyTable()
     tables.field_names = headers
-    tables.max_width = 30
+    tables.max_width = 15
     tables.align = "l"
 
     for row in all_recipes:

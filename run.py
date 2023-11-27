@@ -117,7 +117,7 @@ def all_recipes():
 
     tables = PrettyTable()
     tables.field_names = headers
-    tables.max_width = 6
+    tables.max_width = 7
     tables.align = "l"
 
     for row in all_recipes:
@@ -169,7 +169,7 @@ def recipe_by_name():
         prCyan("\nRecipe Details:")
         tables = PrettyTable()
         tables.field_names = headers
-        tables.max_width = 30
+        tables.max_width = 7
         tables.align = "l"
 
         for row in found_recipes:
@@ -210,7 +210,7 @@ def recipe_suggestion():
         random_recipe = all_recipes[random_index - 1]              
         tables = PrettyTable()
         tables.field_names = headers
-        tables.max_width = 30
+        tables.max_width = 7
         tables.align = "l"
 
         tables.add_row(random_recipe)

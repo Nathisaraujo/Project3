@@ -3,9 +3,9 @@ import gspread
 from google.oauth2.service_account import Credentials
 import os  #import to clear screen
 from random import randint #import to choose random data in the worksheet
-from prettytable import PrettyTable  #import table style
 import time  #import to time.sleep
 import sys  #import to exit program
+from prettytable import PrettyTable
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",

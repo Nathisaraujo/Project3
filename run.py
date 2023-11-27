@@ -77,7 +77,7 @@ def check_recipe():
     print("How would you like to find a recipe?\n")
     print("1. View all recipes")
     print("2. Give me a suggestion")
-    print("3. Specific Recipe")
+    print("3. Check recipe by name")
     print("4. Go back to main page.")
 
     while True:

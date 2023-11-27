@@ -255,17 +255,18 @@ def add_recipe():
     global ingredients_list
     global recipe_preparation
     global recipe_favorite
-    user_details = input("First name:\n")
+    
     recipe_name = input("Name of the recipe:\n")
     ingredients_list = input("What are the ingredients?\n")
     recipe_preparation = input("How we prepare the recipe?\n")
-    recipe_favorite = input("This recipe is who's favorite?\n")
+    user_details = input("Your first name:\n")
+    recipe_favorite = input("Who in our family likes this recipe the most?\n")
 
     print(f"""
-        Your name: {user_details}
         Recipe name: {recipe_name}
         Ingredients List: {ingredients_list}
         Recipe Preparation: {recipe_preparation}
+        Your name: {user_details}
         Recipe Favorite: {recipe_favorite}
         """)
     print("Please, make sure you added all information right.\n")
@@ -305,24 +306,24 @@ def edit_recipe():
     global recipe_favorite
 
     print("Which information would you like to edit?\n")
-    print("1. First name")
-    print("2. Recipe name")
-    print("3. Ingredients list")
-    print("4. Recipe preparation")
+    print("1. Recipe name")
+    print("2. Ingredients list")
+    print("3. Recipe preparation")
+    print("4. First name")
     print("5. Recipe favorite")
     print("6. Cancel and go to the main page\n")
 
     edit_option = input("Enter your option here:\n")
     if edit_option == "1":
-        user_details = input(f'First name ({user_details}):\n') or user_details
-    elif edit_option == "2":
         recipe_name = input(f'Recipe name ({recipe_name}):\n') or recipe_name
-    elif edit_option == "3":
+    elif edit_option == "2":
         ingredients_list = input(f'Ingredients list ({ingredients_list}):\n')\
                             or ingredients_list
-    elif edit_option == "4":
+    elif edit_option == "3":
         recipe_preparation = input(f'Recipe preparation ({recipe_preparation}):\n')\
                             or recipe_preparation
+    elif edit_option == "4":
+        user_details = input(f'First name ({user_details}):\n') or user_details
     elif edit_option == "5":
         recipe_favorite = input(f'Recipe favorite ({recipe_favorite}):\n')\
                             or recipe_favorite
@@ -332,14 +333,14 @@ def edit_recipe():
         prRed('Please, enter a valid option to continue.')
 
     print(f"""
-        Your name: {user_details}
         Recipe name: {recipe_name}
         Ingredients List: {ingredients_list}
         Recipe Preparation: {recipe_preparation}
+        Your name: {user_details}
         Recipe Favorite: {recipe_favorite}
         """)      
     prRed("\nPlease, make sure you added all information right.")
-    print("1. \nConfirm")
+    print("\n1. Confirm")
     print("2. Edit")
     print("3. Cancel and go to main page\n")
 
@@ -359,10 +360,10 @@ def confirm_recipe():
     """
     clear_console()
     data_list = (
-        user_details,
         recipe_name,
         ingredients_list,
         recipe_preparation,
+        user_details,
         recipe_favorite
     )
     recipes.append_row(data_list)

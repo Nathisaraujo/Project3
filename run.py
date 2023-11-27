@@ -1,11 +1,11 @@
-#import gspread to update worksheet
+# import gspread to update worksheet
 import gspread
 from google.oauth2.service_account import Credentials
-import os  #import to clear screen
-from random import randint #import to choose random data in the worksheet
-import time  #import to time.sleep
-import sys  #import to exit program
-from prettytable import PrettyTable
+import os  # import to clear screen
+from random import randint  # import to choose random data in the worksheet
+import time  # import to time.sleep
+import sys  # import to exit program
+from prettytable import PrettyTable  # import table style
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -19,7 +19,9 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('family_favorites')
 recipes = SHEET.worksheet('recipes')
 
-#functions to call colors 
+# functions to call colors
+
+
 def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
 
 
@@ -65,10 +67,10 @@ def initial_page():
 
 def check_recipe():
     """
-    - Option so the user can check the recipe. 
+    - Option so the user can check the recipe.
     - It takes the user to the option they choose, respectively.
     - The user can also choose to exit the program or go back to
-    the main page. 
+    the main page.
     """
     clear_console()
 
@@ -130,7 +132,7 @@ def search_recipe_by_name(recipe_name):
     """
     When the user choose to look for a recipe
     by the name:
-    - Searches the first column of the panel 
+    - Searches the first column of the panel
     to see if the name the user entered exists.
     """
     recipes = []
@@ -144,7 +146,7 @@ def search_recipe_by_name(recipe_name):
 def recipe_by_name():
     """
     - This is the option to look for a recipe by name.
-    - The user writes what he wants and the program 
+    - The user writes what he wants and the program
     sees if the recipe exists in the spreadsheet.
     - If a recipe is found, return the respective row.
     - If no recipe is found, it gives him the option
@@ -176,7 +178,7 @@ def recipe_by_name():
             tables.add_row(row)
         print(tables)
 
-        next_move()     
+        next_move()
     else:
         prRed("No recipes found with that name.")
         print("Please, choose again.")
@@ -186,7 +188,7 @@ def recipe_by_name():
 
 def recipe_suggestion():
     """
-    - In this option, the user chooses to 
+    - In this option, the user chooses to
     receive a random recipe suggestion.
     - It returns a single row with a random
     suggestion from the spreadsheet recipe book.
@@ -206,8 +208,8 @@ def recipe_suggestion():
             "Creator's Name",
             "Who's Favorite"
         ]
-        random_index = randint(1, len(all_recipes)-1)  
-        random_recipe = all_recipes[random_index - 1]              
+        random_index = randint(1, len(all_recipes)-1)
+        random_recipe = all_recipes[random_index - 1]
         tables = PrettyTable()
         tables.field_names = headers
         tables.max_width = 7
@@ -238,13 +240,13 @@ def recipe_suggestion():
 
 def add_recipe():
     """
-    - This option allows the user to add a 
+    - This option allows the user to add a
     new recipe.
     - The user will be asked to fill some information
     that is uploaded to the spreadsheet in a new row.
-    - If it has some type mistakes, the user can choose 
+    - If it has some type mistakes, the user can choose
     to edit it.
-    """   
+    """
     clear_console()
 
     prPurple("Ok! Then we'll need you to give us some information...\n")
@@ -255,7 +257,6 @@ def add_recipe():
     global ingredients_list
     global recipe_preparation
     global recipe_favorite
-    
     recipe_name = input("Name of the recipe:\n")
     ingredients_list = input("What are the ingredients?\n")
     recipe_preparation = input("How we prepare the recipe?\n")
@@ -277,7 +278,7 @@ def add_recipe():
     while True:
         user_option = input("Enter your answer here:\n").strip().lower()
         if user_option == "1":
-            confirm_recipe()        
+            confirm_recipe()
         elif user_option == "2":
             edit_recipe()
         elif user_option == "3":
@@ -338,7 +339,7 @@ def edit_recipe():
         Recipe Preparation: {recipe_preparation}
         Your name: {user_details}
         Recipe Favorite: {recipe_favorite}
-        """)      
+        """)
     prRed("\nPlease, make sure you added all information right.")
     print("\n1. Confirm")
     print("2. Edit")
@@ -377,7 +378,7 @@ def confirm_recipe():
 def next_move():
     """
     This option appears after an option is
-    chosen by the user so he can choose to go back 
+    chosen by the user so he can choose to go back
     to the main page (to do something else) or
     exit the program if he's finished.
     """
@@ -392,7 +393,7 @@ def next_move():
             exit_program()
         else:
             prRed('Please, enter 1 or 2 to continue.')
-            next_move()           
+            next_move()
 
 
 def clear_console():
@@ -415,7 +416,7 @@ def exit_program():
 def main():
     """
     This is the main page. It explains to the
-    user what 'Family Favorites' is about and 
+    user what 'Family Favorites' is about and
     start the program.
     """
     clear_console()
@@ -438,7 +439,7 @@ def main():
      This is a heartfelt family recipe book where
           we can share our favorite recipes!
     This is a gift to our future generation who will
-       be able to prepare the most special recipes.\n""")
+       be able to prepare the most special dishes.\n""")
     input("Press Enter to continue...\n")
     initial_page()
 

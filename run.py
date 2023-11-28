@@ -61,7 +61,7 @@ def initial_page():
             prPurple("Ok... bye bye!\n")
             exit_program()
         else:
-            prRed('Please, enter 1 or 2 to continue.')
+            prRed('Please, enter a valid option to continue.')
             continue
 
 

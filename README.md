@@ -1,4 +1,4 @@
-#Family Favorites
+# Family Favorites
 
 ![main page](./images/mainpage.png)
 
@@ -40,36 +40,51 @@ You can see the deployed project [here](https://family-favorites-0f04df5192e9.he
 * The main page contains an ASCII art with the name of the digital recipe book using 
 [Patorjk](https://patorjk.com/).
 
-main page print
+![main page](./images/mainpage2.png)
 
 * It also contains a little explanation about what this is about.
 
 ### Main options menu
 * This is the main options menu. It gives the user the option to add or check a recipe. 
 * These are the main options the user has.
-main options menu print
+
+![main options](./images/mainoptions.png)
 
 ### Check recipes
+
 * This is the check recipes menu. It allows the user to check a recipe that is already in the recipe book.
-check recipes
+
+![main options](./images/check-recipes.png)
+
 * View all recipes - returns a table with all recipes in the spreadsheet.
-view all option
+
+![main options](./images/allrecipes.png)
+
 * Suggestion recipe - returns a random recipe from the spreadsheet. It also gives the user the option to get a new random suggestion.
-suggestion option
+
+![main options](./images/suggestion.png)
+
 * Search recipe by name - returns all recipes with the name the user entered (or informs the user that there’s no recipe with that name).
-search by name option
+
+![main options](./images/recipebyname.png)
 
 ### Add new recipe
 * Gives the user the option to add a new recipe to the book by getting some information about the new recipe.
-information option
+
+![main options](./images/addrecipe.png)
+
 * If the user confirms the information entered, then the spreadsheet is updated.
-spreadsheet updated
+
+![main options](./images/recipeadded.png)
+
 * If the user wants to edit some information entered, he can enter the edit option as many times as necessary.
-edit information
+
+![main options](./images/editinfo.png)
 
 	### Next move function
 * This function appears after every “end” of an option so the user can choose to go back to the main page (to do some other thing) or to exit the program if he’s finished.
-next move function
+
+![main options](./images/nextmove.png)
 
 ### Future features
 In the future, the user will be able to:
@@ -85,7 +100,7 @@ See below flow chart from [Lucid Chart](https://www.lucidchart.com/) to understa
 * Red background - cancel or/and go to main page or/and exit the program
 * Orange text - gets data from the user
 
-print flow chart
+![main options](./images/fluxograma.png)
 
 ## DESIGN
 	### Colors
@@ -95,10 +110,17 @@ I added some colors to the console so it’s easier for the user to recognize so
 * Purple - interaction with the user 
 * Cyan - details of the recipe
 * Green - updates completed
-prints com cores
+
+![Red](./images/fluxrama.png)
+![main options](./images/fluxorama.png)
+![main options](./images/fluxograa.png)
+![main options](./images/fluxgrama.png)
+![main options](./images/flxograma.png)
+
 	### Table
 I used the [Pretty Table](https://pypi.org/project/prettytable/) website to create a user friendly viewing of the recipes.
-print de tabela
+
+![Table with Pretty Tables](./images/table.png)
 
 ## USER EXPERIENCE (UX)
 * The user has a clear view of the application. 
@@ -115,7 +137,8 @@ print de tabela
 [PEP8 Validation Tool](https://pep8ci.herokuapp.com/) was used to validate the code. A few errors about trailing whitespaces, indentation and long lines appeared but they were easily fixed. The only ones that remained are:
 *  line 324 - I couldn’t shorten the line.
 * line 424 onward - the trailing whitespaces and the invalid sequences are related to the ASCII art.
-print com o teste
+
+![Code Validation](./images/pep8.png)
 
 ### Manual Testing
 See below the manual testing I did. Apparently it’s all working fine.
@@ -188,11 +211,12 @@ This project was deployed using Code Institute’s mock terminal for Heroku. I f
 ### Colleagues
 
 * When I started the project I was wondering how to organize the code so the users could get a clear view of the choices I wanted. I read a lot of projects and the [“Pasta La Vista”](https://github.com/TeodoraAlina/pasta-la-vista/blob/main/run.py) from Teodora Alina inspired me to write it. See below the specific part of her code I got to write mine:
-pasta la vista screenshot
+
+![Code Validation](./images/pastalavista.png)
 
 * Among many things I was inspired by the project [“Kennel Mate”](https://github.com/rstan-dev/P3-Kennel-Mate/blob/main/run.py) by “rstan-dev”, I got the following part of his code to write mine in the “add  recipe” function: 
-print kennel mate
-kennel mate screenshot
+
+![Code Validation](./images/kennelmate.png)
 
 * I was very inspired by the [“Who wants icecream”](https://github.com/LauraMayock/who-wants-Ice-cream/blob/main/README.md) project by my amazing cohort Laura Mayock who has being really kind, understanding and helpful while I was creating this project. I did this (#manual-testing) table looking at her README and also got names of some libraries looking at her work, such as Pretty Tables, Colorama and Patorjk.
 

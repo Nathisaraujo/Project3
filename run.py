@@ -50,7 +50,7 @@ def initial_page():
     while True:
         user_option = input("Enter your answer here:\n").strip()
         if user_option == "1":
-            prYellow("Ok! Let's check what we have here...\n")
+            prPurple("Ok! Let's check what we have here...\n")
             time.sleep(1.5)
             check_recipe()
         elif user_option == "2":

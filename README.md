@@ -1,6 +1,6 @@
 #Family Favorites
 
-![main page](./images/main page.png)
+![main page](./images/mainpage.png)
 
 ## CONTENT
 

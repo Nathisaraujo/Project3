@@ -19,7 +19,8 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('family_favorites')
 recipes = SHEET.worksheet('recipes')
 
-# functions to call colors
+#  functions to call colors
+#  I got this part of the code at geeksforgeeks.org - see readme
 
 
 def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
@@ -47,6 +48,10 @@ def initial_page():
     print("1. Check a recipe")
     print("2. Add a new one")
     print("3. Exit the program\n")
+
+    #  All code using 'while/if/elif/else' structure was inspired 
+    #  in my colleague 'Pasta la vista' project - see readme
+
     while True:
         user_option = input("Enter your answer here:\n").strip()
         if user_option == "1":
@@ -119,7 +124,7 @@ def all_recipes():
 
     tables = PrettyTable()
     tables.field_names = headers
-    tables.max_width = 7
+    tables.max_width = 7 #  ChatGPT suggestion - see readme
     tables.align = "l"
 
     for row in all_recipes:
@@ -314,6 +319,10 @@ def edit_recipe():
     print("5. Recipe favorite")
     print("6. Cancel and go to the main page\n")
 
+    #  This part of the code was suggested by ChatGPT
+    #  in order to fix a bug and also shorten the code
+    #  Please, see the readme for more information
+
     edit_option = input("Enter your option here:\n")
     if edit_option == "1":
         recipe_name = input(f'Recipe name ({recipe_name}):\n') or recipe_name
@@ -367,6 +376,11 @@ def confirm_recipe():
         user_details,
         recipe_favorite
     )
+
+    #  To add a recipe in the spreadsheet,
+    #  I inspired myself in my colleague "Kennel Mate"
+    #  project - see readme
+
     recipes.append_row(data_list)
     prYellow("Loading your information...")
     time.sleep(1.0)
@@ -399,6 +413,8 @@ def next_move():
 def clear_console():
     """
     It clears the console.
+    This part I took from Geeks for Geeks website
+    and ChatGPT to solve the bug - see readme
     """
     os.system('clear' if os.name == 'posix' else 'cls')
 
@@ -406,6 +422,7 @@ def clear_console():
 def exit_program():
     """
     It exits the program when requested by the user.
+    This code was taken from freecodecamp.org - see readme
     """
     clear_console()
     prRed("Exiting the program...")

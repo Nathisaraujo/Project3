@@ -10,7 +10,7 @@
     *[Main options menu](<#main-options-menu>)
     *[Check recipes](<#check-recipes>)
     *[Add new recipe](<#add-new-recipe>)
-    * [Future Features](<#future-features>)
+    *[Future Features](<#future-features>)
 
 * [LOGIC](<#logic>)
 
@@ -54,37 +54,37 @@ You can see the deployed project [here](https://family-favorites-0f04df5192e9.he
 
 * This is the check recipes menu. It allows the user to check a recipe that is already in the recipe book.
 
-![main options](./images/check-recipes.png)
+![check recipes](./images/check-recipes.png)
 
 * View all recipes - returns a table with all recipes in the spreadsheet.
 
-![main options](./images/allrecipes.png)
+![all recipes](./images/allrecipes.png)
 
 * Suggestion recipe - returns a random recipe from the spreadsheet. It also gives the user the option to get a new random suggestion.
 
-![main options](./images/suggestion.png)
+![suggestion recipe](./images/suggestion.png)
 
 * Search recipe by name - returns all recipes with the name the user entered (or informs the user that there’s no recipe with that name).
 
-![main options](./images/recipebyname.png)
+![recipe by name](./images/recipebyname.png)
 
 ### Add new recipe
 * Gives the user the option to add a new recipe to the book by getting some information about the new recipe.
 
-![main options](./images/addrecipe.png)
+![add recipe](./images/addrecipe.png)
 
 * If the user confirms the information entered, then the spreadsheet is updated.
 
-![main options](./images/recipeadded.png)
+![recipe added](./images/recipeadded.png)
 
 * If the user wants to edit some information entered, he can enter the edit option as many times as necessary.
 
-![main options](./images/editinfo.png)
+![edit info](./images/editinfo.png)
 
-	### Next move function
+### Next move function
 * This function appears after every “end” of an option so the user can choose to go back to the main page (to do some other thing) or to exit the program if he’s finished.
 
-![main options](./images/nextmove.png)
+![next move function](./images/nextmove.png)
 
 ### Future features
 In the future, the user will be able to:
@@ -100,10 +100,11 @@ See below flow chart from [Lucid Chart](https://www.lucidchart.com/) to understa
 * Red background - cancel or/and go to main page or/and exit the program
 * Orange text - gets data from the user
 
-![main options](./images/fluxograma.png)
+![fluxogram](./images/fluxograma.png)
 
 ## DESIGN
-	### Colors
+
+### Colors
 I added some colors to the console so it’s easier for the user to recognize some options and results.
 * Red - warning errors or exit the program
 * Yellow - loading information
@@ -111,13 +112,15 @@ I added some colors to the console so it’s easier for the user to recognize so
 * Cyan - details of the recipe
 * Green - updates completed
 
-![Red](./images/fluxrama.png)
-![main options](./images/fluxorama.png)
-![main options](./images/fluxograa.png)
-![main options](./images/fluxgrama.png)
-![main options](./images/flxograma.png)
+![Red](./images/red.png)
 
-	### Table
+![purple](./images/purple.png)
+
+![cyan](./images/blue1.png)
+
+![yellow and green](./images/yellowgreen.png)
+
+### Table
 I used the [Pretty Table](https://pypi.org/project/prettytable/) website to create a user friendly viewing of the recipes.
 
 ![Table with Pretty Tables](./images/table.png)
@@ -131,7 +134,7 @@ I used the [Pretty Table](https://pypi.org/project/prettytable/) website to crea
 * If the user enters an invalid option he will be prompted.
 * At the end of each option, the user will see the “next move” option which will allow him to go back to the main page or exit the program.
 
-##TESTING
+## TESTING
 
 ### Code Validation
 [PEP8 Validation Tool](https://pep8ci.herokuapp.com/) was used to validate the code. A few errors about trailing whitespaces, indentation and long lines appeared but they were easily fixed. The only ones that remained are:
@@ -142,41 +145,8 @@ I used the [Pretty Table](https://pypi.org/project/prettytable/) website to crea
 
 ### Manual Testing
 See below the manual testing I did. Apparently it’s all working fine.
-____________________________________________
-|             |               | Desired    |
-|    Test     |     Input     |  outcome   |
-|_____________|_____________  |____________|
-| What would  | 1 - check     | y          |
-| you like to | 2 - add       | y          |
-| do?         | 3 - main      | y          |
-|             | wrong input   | y          |
-|------------------------------------------|
-|------------------------------------------| 
-| Check       | 1 - view all  | y          |
-| recipes     | 2 - suggestion| y          |
-|             | 3 - by name   | y          |
-|             | 4 - main      | y          |
-|             | wrong input   | y          |
-|------------------------------------------| 
-|------------------------------------------| 
-| Add         | 1 - get info  | y          |
-| recipes     | 2 - edit      | y          |
-|             | 3 - confirm   | y          |
-|             | 4 - cancel    | y          |
-|             | wrong input   | y          |
-|------------------------------------------|
-|------------------------------------------| 
-| Next move   | It goes to    |            |
-| function    | main page     |            |
-| (after all  | or exit       |            |
-| results)    | the program?  | y          |
-|             | wrong input   | y          |
-|------------------------------------------|
-|------------------------------------------| 
-| Exit        | Really exits  |            |
-| program     | the program?  | y          |
-| functions   | wrong input   | y          |
-|_____________|_______________|____________|
+
+![manual testing](./images/manualtesting.png)
 
 * I inspired myself on the table I saw in this project [here](https://github.com/LauraMayock/who-wants-Ice-cream/blob/main/README.md)
 
@@ -212,11 +182,11 @@ This project was deployed using Code Institute’s mock terminal for Heroku. I f
 
 * When I started the project I was wondering how to organize the code so the users could get a clear view of the choices I wanted. I read a lot of projects and the [“Pasta La Vista”](https://github.com/TeodoraAlina/pasta-la-vista/blob/main/run.py) from Teodora Alina inspired me to write it. See below the specific part of her code I got to write mine:
 
-![Code Validation](./images/pastalavista.png)
+![Pasta la vista](./images/pastalavista.png)
 
 * Among many things I was inspired by the project [“Kennel Mate”](https://github.com/rstan-dev/P3-Kennel-Mate/blob/main/run.py) by “rstan-dev”, I got the following part of his code to write mine in the “add  recipe” function: 
 
-![Code Validation](./images/kennelmate.png)
+![Kennel Mate](./images/kennelmate.png)
 
 * I was very inspired by the [“Who wants icecream”](https://github.com/LauraMayock/who-wants-Ice-cream/blob/main/README.md) project by my amazing cohort Laura Mayock who has being really kind, understanding and helpful while I was creating this project. I did this (#manual-testing) table looking at her README and also got names of some libraries looking at her work, such as Pretty Tables, Colorama and Patorjk.
 
@@ -231,5 +201,7 @@ This project was deployed using Code Institute’s mock terminal for Heroku. I f
 * I also used [W3School](https://www.w3schools.com/) a lot.
 
 * [Geeks for Geeks](https://www.geeksforgeeks.org/python-random-module/) also helped a lot to understand how to build a function to show random recipes.
+
+* As described before, I also used chatGPT when I felt stuck. For me, it's an amazing tool because not everytime I knew how to google the problem I was having. In chatGPT I could narrate and explain what was happening and ask for website and contents related to it. It really helped me to study.
 
 * Code Institute’s Love Sandwiches project was essential. I learned a lot from it.

@@ -6,11 +6,11 @@
 
 * [OBJECTIVES](<#objectives>)
 * [FEATURES](<#features>)
-    *[The main page](<#the-main-page>)
-    *[Main options menu](<#main-options-menu>)
-    *[Check recipes](<#check-recipes>)
-    *[Add new recipe](<#add-new-recipe>)
-    *[Future Features](<#future-features>)
+    * [The main page](<#the-main-page>)
+    * [Main options menu](<#main-options-menu>)
+    * [Check recipes](<#check-recipes>)
+    * [Add new recipe](<#add-new-recipe>)
+    * [Future Features](<#future-features>)
 
 * [LOGIC](<#logic>)
 
@@ -112,9 +112,9 @@ I added some colors to the console so it’s easier for the user to recognize so
 * Cyan - details of the recipe
 * Green - updates completed
 
-![Red](./images/red.png)
+![Red](./images/red.jpg)
 
-![purple](./images/purple.png)
+![purple](./images/purple.jpg)
 
 ![cyan](./images/blue1.png)
 

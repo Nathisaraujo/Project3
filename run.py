@@ -40,10 +40,6 @@ def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
 
 
 # Validation functions for recipe fields
-def validate_recipe_name(value):
-    return bool(re.match("^[A-Za-z0-9 ]+$", value))
-
-
 def validate_alphabetic(value):
     return bool(re.match("^[A-Za-z ]+$", value))
 
@@ -187,7 +183,7 @@ def recipe_by_name():
     clear_console()
     prPurple("""Ok! Enter the recipe name here
     and we're going to see if we have it!\n""")
-    recipe_name = validate_input("Check Recipe:\n", validation_fn=validate_recipe_name, error_message="Recipe name can only contain letters, numbers, and spaces.")
+    recipe_name = validate_input("Check Recipe:\n", validation_fn=validate_alphabetic, error_message="Recipe name can only contain letters and spaces.")
     found_recipes = search_recipe_by_name(recipe_name)
 
     headers = [
@@ -290,8 +286,8 @@ def add_recipe():
     global recipe_preparation
     global recipe_favorite
 
-    recipe_name = validate_input("Name of the recipe:\n", validation_fn=validate_recipe_name, error_message="Recipe name can only contain letters, numbers, and spaces.")
-    ingredients_list = validate_input("What are the ingredients?\n")
+    recipe_name = validate_input("Name of the recipe:\n", validation_fn=validate_alphabetic, error_message="Recipe name can only contain letters and spaces.")
+    ingredients_list = validate_input("What are the ingredients?\n", validation_fn=validate_recipe_steps, error_message="Recipe preparation should be at least a few words.")
     recipe_preparation = validate_input("How we prepare the recipe?\n", validation_fn=validate_recipe_steps, error_message="Recipe preparation should be at least a few words.")
     user_details = validate_input("Your first name:\n", validation_fn=validate_alphabetic, error_message="Name can only contain alphabetic characters and spaces.")
     recipe_favorite = validate_input("Who in our family likes this recipe the most?\n", validation_fn=validate_alphabetic, error_message="Name can only contain alphabetic characters and spaces.")

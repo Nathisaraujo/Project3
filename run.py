@@ -1,5 +1,5 @@
 # import gspread to update worksheet
-import re # importation tool to search for patterns in strings
+import re  # importation tool to search for patterns in strings
 import gspread
 from google.oauth2.service_account import Credentials
 import os  # import to clear screen
@@ -49,7 +49,11 @@ def validate_recipe_steps(value):
 
 
 # ensures that user inputs are not empty or invalid
-def validate_input(prompt, allow_empty=False, validation_fn=None, error_message="Invalid input"):
+def validate_input(prompt, allow_empty=False, validation_fn=None,
+                   error_message="Invalid input"):
+    """
+    Validate user input based on given criteria.
+    """
     while True:
         user_input = input(prompt).strip()
         if user_input or allow_empty:
@@ -72,7 +76,7 @@ def initial_page():
     print("2. Add a new one")
     print("3. Exit the program\n")
 
-    #  All code using 'while/if/elif/else' structure was inspired 
+    #  All code using 'while/if/elif/else' structure was inspired
     #  in my colleague 'Pasta la vista' project - see readme
 
     while True:
@@ -109,7 +113,9 @@ def check_recipe():
     print("4. Go back to main page.")
 
     while True:
-        user_option = validate_input("\nEnter your answer here:\n").strip().lower()
+        user_option = validate_input(
+            "\nEnter your answer here:\n"
+        ).strip().lower()
         if user_option == "1":
             all_recipes()
         elif user_option == "2":
@@ -147,7 +153,7 @@ def all_recipes():
 
     tables = PrettyTable()
     tables.field_names = headers
-    tables.max_width = 7 #  ChatGPT suggestion - see readme
+    tables.max_width = 7  # ChatGPT suggestion - see readme
     tables.align = "l"
 
     for row in all_recipes:
@@ -183,7 +189,11 @@ def recipe_by_name():
     clear_console()
     prPurple("""Ok! Enter the recipe name here
     and we're going to see if we have it!\n""")
-    recipe_name = validate_input("Check Recipe:\n", validation_fn=validate_alphabetic, error_message="Recipe name can only contain letters and spaces.")
+    recipe_name = validate_input(
+        "Check Recipe:\n",
+        validation_fn=validate_alphabetic,
+        error_message="Recipe name can only contain letters and spaces."
+    )
     found_recipes = search_recipe_by_name(recipe_name)
 
     headers = [
@@ -252,7 +262,9 @@ def recipe_suggestion():
         print("3. Exit the program.\n")
 
         while True:
-            user_option = validate_input("Enter your answer here:\n").strip().lower()
+            user_option = validate_input(
+                "Enter your answer here:\n"
+            ).strip().lower()
             if user_option == "1":
                 os.system('clear')
                 recipe_suggestion()
@@ -286,11 +298,35 @@ def add_recipe():
     global recipe_preparation
     global recipe_favorite
 
-    recipe_name = validate_input("Name of the recipe:\n", validation_fn=validate_alphabetic, error_message="Recipe name can only contain letters and spaces.")
-    ingredients_list = validate_input("What are the ingredients?\n", validation_fn=validate_recipe_steps, error_message="Recipe preparation should be at least a few words.")
-    recipe_preparation = validate_input("How we prepare the recipe?\n", validation_fn=validate_recipe_steps, error_message="Recipe preparation should be at least a few words.")
-    user_details = validate_input("Your first name:\n", validation_fn=validate_alphabetic, error_message="Name can only contain alphabetic characters and spaces.")
-    recipe_favorite = validate_input("Who in our family likes this recipe the most?\n", validation_fn=validate_alphabetic, error_message="Name can only contain alphabetic characters and spaces.")
+    recipe_name = validate_input(
+        "Name of the recipe:\n",
+        validation_fn=validate_alphabetic,
+        error_message="Recipe name can only contain letters and spaces."
+    )
+
+    ingredients_list = validate_input(
+        "What are the ingredients?\n",
+        validation_fn=validate_recipe_steps,
+        error_message="Recipe preparation should be at least a few words."
+    )
+
+    recipe_preparation = validate_input(
+        "How we prepare the recipe?\n",
+        validation_fn=validate_recipe_steps,
+        error_message="Recipe preparation should be at least a few words."
+    )
+
+    user_details = validate_input(
+        "Your first name:\n",
+        validation_fn=validate_alphabetic,
+        error_message="Name can only contain alphabetic characters and spaces."
+    )
+
+    recipe_favorite = validate_input(
+        "Who in our family likes this recipe the most?\n",
+        validation_fn=validate_alphabetic,
+        error_message="Name can only contain alphabetic characters and spaces."
+    )
 
     print(f"""
         Recipe name: {recipe_name}
@@ -305,7 +341,9 @@ def add_recipe():
     print("3. Cancel and go to main page\n")
 
     while True:
-        user_option = validate_input("Enter your answer here:\n").strip().lower()
+        user_option = validate_input(
+            "Enter your answer here:\n"
+        ).strip().lower()
         if user_option == "1":
             confirm_recipe()
         elif user_option == "2":
@@ -349,18 +387,25 @@ def edit_recipe():
 
     edit_option = validate_input("Enter your option here:\n")
     if edit_option == "1":
-        recipe_name = validate_input(f'Recipe name ({recipe_name}):\n') or recipe_name
+        recipe_name = validate_input(
+            f'Recipe name ({recipe_name}):\n'
+        ) or recipe_name
     elif edit_option == "2":
-        ingredients_list = validate_input(f'Ingredients list ({ingredients_list}):\n')\
-                            or ingredients_list
+        ingredients_list = validate_input(
+            f'Ingredients list ({ingredients_list}):\n'
+        ) or ingredients_list
     elif edit_option == "3":
-        recipe_preparation = validate_input(f'Recipe preparation ({recipe_preparation}):\n')\
-                            or recipe_preparation
+        recipe_preparation = validate_input(
+            f'Recipe preparation ({recipe_preparation}):\n'
+        ) or recipe_preparation
     elif edit_option == "4":
-        user_details = validate_input(f'First name ({user_details}):\n') or user_details
+        user_details = validate_input(
+            f'First name ({user_details}):\n'
+        ) or user_details
     elif edit_option == "5":
-        recipe_favorite = validate_input(f'Recipe favorite ({recipe_favorite}):\n')\
-                            or recipe_favorite
+        recipe_favorite = validate_input(
+            f'Recipe favorite ({recipe_favorite}):\n'
+        ) or recipe_favorite
     elif edit_option == "6":
         main()
     else:
@@ -407,7 +452,13 @@ def confirm_recipe():
     global ingredients_list
     global recipe_preparation
     global recipe_favorite
-    data = [recipe_name, ingredients_list, recipe_preparation, user_details, recipe_favorite]
+    data = [
+        recipe_name,
+        ingredients_list,
+        recipe_preparation,
+        user_details,
+        recipe_favorite
+    ]
 
     #  To add a recipe in the spreadsheet,
     #  I inspired myself in my colleague "Kennel Mate"

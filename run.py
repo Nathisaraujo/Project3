@@ -1,4 +1,5 @@
 # import gspread to update worksheet
+import re # importation tool to search for patterns in strings
 import gspread
 from google.oauth2.service_account import Credentials
 import os  # import to clear screen
@@ -38,13 +39,28 @@ def prCyan(skk): print("\033[96m {}\033[00m" .format(skk))
 def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
 
 
-# ensures that user inputs are not empty
+# Validation functions for recipe fields
+def validate_recipe_name(value):
+    return bool(re.match("^[A-Za-z0-9 ]+$", value))
 
-def validate_input(prompt, allow_empty=False):
+
+def validate_alphabetic(value):
+    return bool(re.match("^[A-Za-z ]+$", value))
+
+
+def validate_recipe_steps(value):
+    return len(value.split()) > 2
+
+
+# ensures that user inputs are not empty or invalid
+def validate_input(prompt, allow_empty=False, validation_fn=None, error_message="Invalid input"):
     while True:
         user_input = input(prompt).strip()
         if user_input or allow_empty:
-            return user_input
+            if validation_fn is None or validation_fn(user_input):
+                return user_input
+            else:
+                prRed(error_message)
         else:
             prRed("Input cannot be empty. Please try again.")
 
@@ -171,7 +187,7 @@ def recipe_by_name():
     clear_console()
     prPurple("""Ok! Enter the recipe name here
     and we're going to see if we have it!\n""")
-    recipe_name = validate_input("Check Recipe:\n")
+    validate_input("Check Recipe:\n", validation_fn=validate_recipe_name, error_message="Recipe name can only contain letters, numbers, and spaces.")
     found_recipes = search_recipe_by_name(recipe_name)
 
     headers = [
@@ -273,11 +289,12 @@ def add_recipe():
     global ingredients_list
     global recipe_preparation
     global recipe_favorite
-    recipe_name = validate_input("Name of the recipe:\n")
+
+    recipe_name = validate_input("Name of the recipe:\n", validation_fn=validate_recipe_name, error_message="Recipe name can only contain letters, numbers, and spaces.")
     ingredients_list = validate_input("What are the ingredients?\n")
-    recipe_preparation = validate_input("How we prepare the recipe?\n")
-    user_details = validate_input("Your first name:\n")
-    recipe_favorite = validate_input("Who in our family likes this recipe the most?\n")
+    recipe_preparation = validate_input("How we prepare the recipe?\n", validation_fn=validate_recipe_steps, error_message="Recipe preparation should be at least a few words.")
+    user_details = validate_input("Your first name:\n", validation_fn=validate_alphabetic, error_message="Name can only contain alphabetic characters and spaces.")
+    recipe_favorite = validate_input("Who in our family likes this recipe the most?\n", validation_fn=validate_alphabetic, error_message="Name can only contain alphabetic characters and spaces.")
 
     print(f"""
         Recipe name: {recipe_name}
@@ -456,6 +473,8 @@ def exit_program():
     This code was taken from freecodecamp.org - see readme
     """
     clear_console()
+    prGreen("Thanks for using the family favorites recipe book! Goodbye!")
+    time.sleep(2)
     prRed("Exiting the program...")
     time.sleep(1.0)
     sys.exit(0)
@@ -482,7 +501,7 @@ def main():
         |_|  \__,_| \_/ \___/|_|  |_|\__\___||___/
         """)
     prYellow("""\n
-                     Welcom to
+                     Welcome to
                  Family Favorites
      This is a heartfelt family recipe book where
           we can share our favorite recipes!

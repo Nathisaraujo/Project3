@@ -187,7 +187,7 @@ def recipe_by_name():
     clear_console()
     prPurple("""Ok! Enter the recipe name here
     and we're going to see if we have it!\n""")
-    validate_input("Check Recipe:\n", validation_fn=validate_recipe_name, error_message="Recipe name can only contain letters, numbers, and spaces.")
+    recipe_name = validate_input("Check Recipe:\n", validation_fn=validate_recipe_name, error_message="Recipe name can only contain letters, numbers, and spaces.")
     found_recipes = search_recipe_by_name(recipe_name)
 
     headers = [

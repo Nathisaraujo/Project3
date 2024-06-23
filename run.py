@@ -38,6 +38,17 @@ def prCyan(skk): print("\033[96m {}\033[00m" .format(skk))
 def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
 
 
+# ensures that user inputs are not empty
+
+def validate_input(prompt, allow_empty=False):
+    while True:
+        user_input = input(prompt).strip()
+        if user_input or allow_empty:
+            return user_input
+        else:
+            prRed("Input cannot be empty. Please try again.")
+
+
 def initial_page():
     """
     Initial page
@@ -53,7 +64,7 @@ def initial_page():
     #  in my colleague 'Pasta la vista' project - see readme
 
     while True:
-        user_option = input("Enter your answer here:\n").strip()
+        user_option = validate_input("Enter your answer here:\n").strip()
         if user_option == "1":
             prPurple("Ok! Let's check what we have here...\n")
             time.sleep(1.5)
@@ -86,7 +97,7 @@ def check_recipe():
     print("4. Go back to main page.")
 
     while True:
-        user_option = input("\nEnter your answer here:\n").strip().lower()
+        user_option = validate_input("\nEnter your answer here:\n").strip().lower()
         if user_option == "1":
             all_recipes()
         elif user_option == "2":
@@ -160,7 +171,7 @@ def recipe_by_name():
     clear_console()
     prPurple("""Ok! Enter the recipe name here
     and we're going to see if we have it!\n""")
-    recipe_name = input("Check Recipe:\n")
+    recipe_name = validate_input("Check Recipe:\n")
     found_recipes = search_recipe_by_name(recipe_name)
 
     headers = [
@@ -229,7 +240,7 @@ def recipe_suggestion():
         print("3. Exit the program.\n")
 
         while True:
-            user_option = input("Enter your answer here:\n").strip().lower()
+            user_option = validate_input("Enter your answer here:\n").strip().lower()
             if user_option == "1":
                 os.system('clear')
                 recipe_suggestion()
@@ -262,11 +273,11 @@ def add_recipe():
     global ingredients_list
     global recipe_preparation
     global recipe_favorite
-    recipe_name = input("Name of the recipe:\n")
-    ingredients_list = input("What are the ingredients?\n")
-    recipe_preparation = input("How we prepare the recipe?\n")
-    user_details = input("Your first name:\n")
-    recipe_favorite = input("Who in our family likes this recipe the most?\n")
+    recipe_name = validate_input("Name of the recipe:\n")
+    ingredients_list = validate_input("What are the ingredients?\n")
+    recipe_preparation = validate_input("How we prepare the recipe?\n")
+    user_details = validate_input("Your first name:\n")
+    recipe_favorite = validate_input("Who in our family likes this recipe the most?\n")
 
     print(f"""
         Recipe name: {recipe_name}
@@ -281,7 +292,7 @@ def add_recipe():
     print("3. Cancel and go to main page\n")
 
     while True:
-        user_option = input("Enter your answer here:\n").strip().lower()
+        user_option = validate_input("Enter your answer here:\n").strip().lower()
         if user_option == "1":
             confirm_recipe()
         elif user_option == "2":
@@ -323,19 +334,19 @@ def edit_recipe():
     #  in order to fix a bug and also shorten the code
     #  Please, see the readme for more information
 
-    edit_option = input("Enter your option here:\n")
+    edit_option = validate_input("Enter your option here:\n")
     if edit_option == "1":
-        recipe_name = input(f'Recipe name ({recipe_name}):\n') or recipe_name
+        recipe_name = validate_input(f'Recipe name ({recipe_name}):\n') or recipe_name
     elif edit_option == "2":
-        ingredients_list = input(f'Ingredients list ({ingredients_list}):\n')\
+        ingredients_list = validate_input(f'Ingredients list ({ingredients_list}):\n')\
                             or ingredients_list
     elif edit_option == "3":
-        recipe_preparation = input(f'Recipe preparation ({recipe_preparation}):\n')\
+        recipe_preparation = validate_input(f'Recipe preparation ({recipe_preparation}):\n')\
                             or recipe_preparation
     elif edit_option == "4":
-        user_details = input(f'First name ({user_details}):\n') or user_details
+        user_details = validate_input(f'First name ({user_details}):\n') or user_details
     elif edit_option == "5":
-        recipe_favorite = input(f'Recipe favorite ({recipe_favorite}):\n')\
+        recipe_favorite = validate_input(f'Recipe favorite ({recipe_favorite}):\n')\
                             or recipe_favorite
     elif edit_option == "6":
         main()
@@ -355,11 +366,19 @@ def edit_recipe():
     print("3. Cancel and go to main page\n")
 
     while True:
-        user_option = input("Enter your answer here:\n").strip().lower()
+        user_option = validate_input("Enter your answer here:\n").lower()
         if user_option == "1":
             confirm_recipe()
         elif user_option == "2":
             edit_recipe()
+        elif user_option == "3":
+            clear_console()
+            main()
+        elif user_option == "exit":
+            exit_program()
+        else:
+            prRed('Please, enter a valid option to continue.')
+            prRed("Or you can enter 'exit' to go back to the initial menu.")
 
 
 def confirm_recipe():
@@ -396,18 +415,22 @@ def next_move():
     to the main page (to do something else) or
     exit the program if he's finished.
     """
-    print("\nWhat to do next?")
-    print("1. Main page")
-    print("2. Exit program\n")
-    user_option = input("Enter here your option:\n").strip().lower()
+    prCyan("\nWhat to do next?")
+    print("1. Search again.")
+    print("2. Go back to main menu.")
+    print("3. Exit the program.\n")
+
     while True:
+        user_option = validate_input("Enter your answer here:\n").lower()
         if user_option == "1":
-            main()
+            check_recipe()
         elif user_option == "2":
+            clear_console()
+            main()
+        elif user_option == "3":
             exit_program()
         else:
-            prRed('Please, enter 1 or 2 to continue.')
-            next_move()
+            prRed('Please, enter a valid option to continue.')
 
 
 def clear_console():

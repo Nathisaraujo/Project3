@@ -388,24 +388,32 @@ def confirm_recipe():
     'confirm' in the console.
     """
     clear_console()
-    data_list = (
-        recipe_name,
-        ingredients_list,
-        recipe_preparation,
-        user_details,
-        recipe_favorite
-    )
+    prGreen("Thank you! Just one second and we're done!\n")
+    global user_details
+    global recipe_name
+    global ingredients_list
+    global recipe_preparation
+    global recipe_favorite
+    data = [recipe_name, ingredients_list, recipe_preparation, user_details, recipe_favorite]
 
     #  To add a recipe in the spreadsheet,
     #  I inspired myself in my colleague "Kennel Mate"
     #  project - see readme
 
-    recipes.append_row(data_list)
-    prYellow("Loading your information...")
-    time.sleep(1.0)
-    prGreen("Recipe added.")
-
-    next_move()
+    try:
+        SHEET.worksheet("recipes").append_row(data)
+        prYellow("Loading your information...")
+        time.sleep(1.0)
+        prGreen('All done! Recipe saved!\n')
+        time.sleep(2)
+        clear_console()
+        next_move()
+    except Exception as e:
+        prRed(f"An error occurred: {e}")
+        print("Please, try again later.")
+        time.sleep(2)
+        clear_console()
+        next_move()
 
 
 def next_move():
@@ -416,7 +424,7 @@ def next_move():
     exit the program if he's finished.
     """
     prCyan("\nWhat to do next?")
-    print("1. Search again.")
+    print("1. Search recipe.")
     print("2. Go back to main menu.")
     print("3. Exit the program.\n")
 
